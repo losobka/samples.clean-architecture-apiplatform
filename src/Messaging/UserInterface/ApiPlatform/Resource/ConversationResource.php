@@ -15,6 +15,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Model\Operation;
 use App\Messaging\Application\DTO\ConversationDTO;
 use App\Messaging\Application\DTO\ParticipantDTO;
 use App\Messaging\UserInterface\ApiPlatform\Processor\CreateConversationProcessor;
@@ -27,17 +28,17 @@ use Symfony\Component\Validator\Constraints as Assert;
     shortName: 'Conversation',
     operations: [
         new GetCollection(
-            openapiContext: ['summary' => 'List conversations.'],
+            openapi: new Operation(summary: 'List conversations.'),
             normalizationContext: ['groups' => 'read'],
             provider: ConversationsProvider::class,
         ),
         new Get(
-            openapiContext: ['summary' => 'Get conversation details.'],
+            openapi: new Operation(summary: 'Get conversation details.'),
             normalizationContext: ['groups' => 'read'],
             provider: ConversationProvider::class,
         ),
         new Post(
-            openapiContext: ['summary' => 'Create new conversation.'],
+            openapi: new Operation(summary: 'Create new conversation.'),
             denormalizationContext: ['groups' => 'create'],
             validationContext: ['groups' => ['create']],
             processor: CreateConversationProcessor::class,

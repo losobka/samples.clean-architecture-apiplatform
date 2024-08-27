@@ -12,6 +12,7 @@ namespace App\Authentication\UserInterface\ApiPlatform\Resource;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Model\Operation;
 use App\Authentication\UserInterface\ApiPlatform\Output\JWT;
 use App\Authentication\UserInterface\ApiPlatform\Payload\Login;
 use App\Authentication\UserInterface\ApiPlatform\Payload\Signup;
@@ -23,7 +24,7 @@ use App\Authentication\UserInterface\ApiPlatform\Processor\SignupProcessor;
     operations: [
         new Post(
             '/login',
-            openapiContext: ['summary' => 'Login'],
+            openapi: new Operation(summary: 'Login'),
             validationContext: ['groups' => ['login']],
             input: Login::class,
             output: JWT::class,
@@ -31,7 +32,7 @@ use App\Authentication\UserInterface\ApiPlatform\Processor\SignupProcessor;
         ),
         new Post(
             '/signup',
-            openapiContext: ['summary' => 'Signup'],
+            openapi: new Operation(summary: 'Signup'),
             validationContext: ['groups' => ['create', 'signup']],
             input: Signup::class,
             output: JWT::class,

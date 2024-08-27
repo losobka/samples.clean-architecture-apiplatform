@@ -15,6 +15,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Model\Operation;
 use App\User\Application\DTO\UserDTO;
 use App\User\UserInterface\ApiPlatform\Processor\CreateUserProcessor;
 use App\User\UserInterface\ApiPlatform\Provider\UserProvider;
@@ -26,15 +27,15 @@ use Symfony\Component\Validator\Constraints as Assert;
     shortName: 'User',
     operations: [
         new GetCollection(
-            openapiContext: ['summary' => 'Search users'],
+            openapi: new Operation(summary: 'Search users'),
             provider: UsersProvider::class,
         ),
         new Get(
-            openapiContext: ['summary' => 'Get user'],
+            openapi: new Operation(summary: 'Get user'),
             provider: UserProvider::class,
         ),
         new Post(
-            openapiContext: ['summary' => 'Create user'],
+            openapi: new Operation(summary: 'Create user'),
             denormalizationContext: ['groups' => ['create']],
             validationContext: ['groups' => ['create']],
             processor: CreateUserProcessor::class,

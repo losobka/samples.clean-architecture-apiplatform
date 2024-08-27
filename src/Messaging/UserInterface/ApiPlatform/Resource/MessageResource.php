@@ -14,6 +14,7 @@ use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Model\Operation;
 use App\Messaging\Application\DTO\MessageDTO;
 use App\Messaging\UserInterface\ApiPlatform\Processor\SendMessageProcessor;
 use App\Messaging\UserInterface\ApiPlatform\Provider\ConversationProvider;
@@ -27,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Post(
             '/conversations/{id}/messages',
             status: 201,
-            openapiContext: ['summary' => 'Send message to conversation.'],
+            openapi: new Operation(summary: 'Send message to conversation.'),
             denormalizationContext: ['groups' => 'create'],
             validationContext: ['groups' => ['create']],
             output: false,
@@ -36,7 +37,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         ),
         new GetCollection(
             '/conversations/{id}/messages',
-            openapiContext: ['summary' => 'Get messages of conversation.'],
+            openapi: new Operation(summary: 'Get messages of conversation.'),
             normalizationContext: ['groups' => 'read'],
             provider: MessagesProvider::class,
         ),
