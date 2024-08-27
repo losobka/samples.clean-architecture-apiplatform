@@ -35,6 +35,8 @@ services:
       
       JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY}
       JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+      
+      PHP_IDE_CONFIG: 'serverName=${SERVER_NAME}'
     networks:
       - db-network
 
