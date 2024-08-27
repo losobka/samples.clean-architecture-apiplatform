@@ -3,8 +3,10 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Symfony\Set\SymfonySetList;
+use Rector\TypeDeclaration\Rector\StmtsAwareInterface\DeclareStrictTypesRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
@@ -22,6 +24,11 @@ return static function (RectorConfig $rectorConfig): void {
         SymfonySetList::SYMFONY_64,
         SymfonySetList::SYMFONY_70,
         SymfonySetList::SYMFONY_71
+    ]);
+
+    $rectorConfig->rule(DeclareStrictTypesRector::class);
+    $rectorConfig->skip([
+        ReadOnlyClassRector::class
     ]);
 
     $rectorConfig->importNames();
