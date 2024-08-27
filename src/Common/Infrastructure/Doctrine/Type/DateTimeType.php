@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace App\Common\Infrastructure\Doctrine\Type;
 
+use App\Common\Domain\ValueObject\DateTime;
+use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\DateTimeType as BaseDateTimeType;
 class DateTimeType extends BaseDateTimeType
 {
@@ -18,5 +20,10 @@ class DateTimeType extends BaseDateTimeType
     public function getName(): string
     {
         return self::TYPE;
+    }
+
+    public function convertToPHPValue($value, AbstractPlatform $platform)
+    {
+        return new DateTime($value ?? 'now');
     }
 }
