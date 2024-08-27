@@ -12,7 +12,6 @@ namespace App\Common\Infrastructure\Symfony\Security;
 
 use App\Authentication\Application\DTO\AuthUserDTO;
 use App\Common\Application\Session\Security;
-use Symfony\Component\Security\Core\Security as SecurityComponent;
 use App\Common\UserInterface\Security\AuthUser;
 
 final readonly class SecurityService implements Security
