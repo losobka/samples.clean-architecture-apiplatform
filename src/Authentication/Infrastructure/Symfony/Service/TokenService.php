@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Authentication\Infrastructure\Symfony\Service;
 
+use OpenSSLAsymmetricKey;
 use App\Authentication\Application\Service\TokenDecoder;
 use App\Authentication\Application\Service\TokenEncoder;
 use Firebase\JWT\JWT;
@@ -24,7 +25,7 @@ final class TokenService implements TokenDecoder, TokenEncoder
         return (array) JWT::decode($token, new Key($this->getPublicKey(), self::JWT_ALGORITHM));
     }
 
-    private function getPublicKey(): \OpenSSLAsymmetricKey
+    private function getPublicKey(): OpenSSLAsymmetricKey
     {
         return openssl_pkey_get_public('file://' . $this->jwtPublicKey);
     }
@@ -34,7 +35,7 @@ final class TokenService implements TokenDecoder, TokenEncoder
         return JWT::encode($payload, $this->getPrivateKey(), self::JWT_ALGORITHM);
     }
 
-    private function getPrivateKey(): \OpenSSLAsymmetricKey
+    private function getPrivateKey(): OpenSSLAsymmetricKey
     {
         return openssl_pkey_get_private('file://' . $this->jwtPrivateKey);
     }

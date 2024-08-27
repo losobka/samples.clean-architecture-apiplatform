@@ -6,28 +6,30 @@ namespace App\Common\Domain\ValueObject;
 
 use Stringable;
 use InvalidArgumentException;
-use Ramsey\Uuid\Uuid as RamseyUuid;
+use Symfony\Component\Uid\Ulid as SymfonyUlid;
 
-abstract class Uuid implements Stringable
+abstract class Ulid implements Stringable
 {
-    private function __construct(protected string $value)
+    private function __construct(protected SymfonyUlid $value)
     {
-        $this->ensureIsValidUuid($value);
+        $this->ensureIsValidUlid($value);
     }
 
     public static function generate(): static
     {
-        return new static(RamseyUuid::uuid4()->toString());
+//        return new static(SymfonyUlid::generate());
+        return new static(new SymfonyUlid);
+//        return new static(RamseyUuid::uuid4()->toString());
     }
 
     public static function fromString(string $value): static
     {
-        return new static($value);
+        return new static(SymfonyUlid::fromString($value));
     }
 
     public function value(): string
     {
-        return $this->value;
+        return $this->value->toRfc4122();
     }
 
     public function equals(mixed $other): bool
@@ -40,9 +42,9 @@ abstract class Uuid implements Stringable
         return $this->value();
     }
 
-    private function ensureIsValidUuid(string $id): void
+    private function ensureIsValidUlid(SymfonyUlid $id): void
     {
-        if (!RamseyUuid::isValid($id)) {
+        if (!SymfonyUlid::isValid($id->__toString())) {
             throw new InvalidArgumentException(sprintf('The uuid "%s" is not valid.', $id));
         }
     }

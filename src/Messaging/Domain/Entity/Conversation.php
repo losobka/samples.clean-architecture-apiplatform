@@ -14,7 +14,6 @@ use App\Messaging\Domain\ValueObject\ConversationId;
 use App\Messaging\Domain\ValueObject\MessageContent;
 use App\User\Application\DTO\UserDTO;
 use App\User\Domain\ValueObject\UserId;
-use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -22,25 +21,22 @@ class Conversation extends AggregateRoot
 {
     public const MIN_PARTICIPANTS = 2;
 
-    private ConversationId $id;
-
-    private DateTime $createdAt;
+    private readonly ConversationId $id;
 
     /** @var Collection<int, Message> */
-    private Collection $messages;
+    private readonly Collection $messages;
 
     /** @var Collection<int, Participant> */
-    private Collection $participants;
+    private readonly Collection $participants;
 
     /**
      * @param UserDTO[] $usersDTOs
      */
-    private function __construct(DateTime $createdAt, array $usersDTOs)
+    private function __construct(private readonly DateTime $createdAt, array $usersDTOs)
     {
         $this->ensureHasEnoughParticipants($usersDTOs);
 
         $this->id = ConversationId::generate();
-        $this->createdAt = $createdAt;
         $this->messages = new ArrayCollection();
         $this->participants = new ArrayCollection();
 
@@ -69,7 +65,7 @@ class Conversation extends AggregateRoot
                 Message::create(
                     $this,
                     $content,
-                    Carbon::now(),
+                    DateTime::now(),
                     $participant,
                 )
             );

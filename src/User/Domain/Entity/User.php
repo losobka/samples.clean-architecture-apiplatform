@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\User\Domain\Entity;
 
+use RuntimeException;
 use App\Common\Domain\Entity\AggregateRoot;
 use App\Common\Domain\ValueObject\DateTime;
 use App\Common\Domain\ValueObject\Email;
@@ -15,14 +16,14 @@ class User extends AggregateRoot
 {
     private readonly UserId $id;
 
-    private DateTime $createdAt;
+    private readonly DateTime $createdAt;
 
     private ?DateTime $removedAt = null;
 
     private function __construct(
-        private FirstName $firstName,
-        private LastName $lastName,
-        private Email $email,
+        private readonly FirstName $firstName,
+        private readonly LastName $lastName,
+        private readonly Email $email,
     ) {
         $this->id = UserId::generate();
         $this->createdAt = DateTime::now();
@@ -80,7 +81,7 @@ class User extends AggregateRoot
     private function ensureIsNotAlreadyRemoved(): void
     {
         if ($this->isRemoved()) {
-            throw new \RuntimeException('User is already removed !');
+            throw new RuntimeException('User is already removed !');
         }
     }
 }

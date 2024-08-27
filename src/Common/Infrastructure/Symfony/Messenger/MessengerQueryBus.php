@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Common\Infrastructure\Symfony\Messenger;
 
+use Throwable;
 use App\Common\Application\Query\QueryBus;
 use App\Common\Application\Query\Query;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
@@ -24,10 +25,10 @@ final class MessengerQueryBus implements QueryBus
         try {
             return $this->handle($query);
         } catch (HandlerFailedException $e) {
-            /** @var array{0: \Throwable} $exceptions */
-            $exceptions = $e->getNestedExceptions();
+            /** @var array{0: Throwable} $exceptions */
+            $exceptions = $e->getWrappedExceptions();
 
-            throw $exceptions[0];
+            throw current($exceptions);
         }
     }
 }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Common\Domain\ValueObject;
 
-abstract class StringValue
+use Stringable;
+
+abstract class StringValue implements Stringable
 {
     protected function __construct(protected string $value)
     {

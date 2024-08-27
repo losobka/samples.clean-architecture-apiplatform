@@ -16,10 +16,17 @@ final class Password extends StringValue
      */
     protected function __construct(
         string $password,
+        bool $ensureIsStrength = true
     ) {
         parent::__construct($password);
 
-        $this->ensureIsStrength();
+        if ($ensureIsStrength)
+            $this->ensureIsStrength();
+    }
+
+    public static function fromString(string $value, bool $ensureIsStrength = true): static
+    {
+        return new static($value, $ensureIsStrength);
     }
 
     /**

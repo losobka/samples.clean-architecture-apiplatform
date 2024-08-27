@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Messaging\Domain\Exception;
 
-final class ParticipantsIdsMissing extends \DomainException
+use DomainException;
+
+final class ParticipantsIdsMissing extends DomainException
 {
     public function __construct()
     {

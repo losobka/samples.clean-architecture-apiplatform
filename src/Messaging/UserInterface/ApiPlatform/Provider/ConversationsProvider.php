@@ -46,8 +46,6 @@ final class ConversationsProvider implements ProviderInterface
      */
     private function mapConversationDTOsToConversationsResources(array $conversationsDTOs): array
     {
-        return array_map(static function (ConversationDTO $conversationDTO) {
-            return ConversationResource::fromConversationDTO($conversationDTO);
-        }, $conversationsDTOs);
+        return array_map(static fn(ConversationDTO $conversationDTO) => ConversationResource::fromConversationDTO($conversationDTO), $conversationsDTOs);
     }
 }

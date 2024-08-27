@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Common\Domain\ValueObject;
 
+use InvalidArgumentException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Webmozart\Assert\Assert;
 
 abstract class ArrayValue
 {
-    private Collection $collection;
+    private readonly Collection $collection;
 
     protected function __construct(array $elements, private readonly string $className)
     {
@@ -47,7 +48,7 @@ abstract class ArrayValue
     private function ensureHasValidElementClass(string $elementClass): void
     {
         if (!class_exists($elementClass)) {
-            throw new \InvalidArgumentException(sprintf('Collection object need valid element class, "%s" given.', $elementClass));
+            throw new InvalidArgumentException(sprintf('Collection object need valid element class, "%s" given.', $elementClass));
         }
     }
 

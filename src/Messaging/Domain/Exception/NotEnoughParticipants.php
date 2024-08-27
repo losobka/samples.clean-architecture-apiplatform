@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Messaging\Domain\Exception;
 
-class NotEnoughParticipants extends \DomainException
+use DomainException;
+
+class NotEnoughParticipants extends DomainException
 {
     public function __construct(int $minParticipants, int $nbParticipantsGiven)
     {

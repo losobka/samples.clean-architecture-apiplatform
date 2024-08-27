@@ -33,9 +33,7 @@ final class JWTAuthenticator extends AbstractAuthenticator
     {
         $auth = $this->userProvider->loadUserByIdentifier($request->headers->get(self::HEADER_NAME));
 
-        return new SelfValidatingPassport(new UserBadge($auth->getUserIdentifier(), static function () use ($auth) {
-            return $auth;
-        }));
+        return new SelfValidatingPassport(new UserBadge($auth->getUserIdentifier(), static fn() => $auth));
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response

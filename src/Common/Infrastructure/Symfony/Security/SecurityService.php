@@ -12,7 +12,7 @@ use App\Common\UserInterface\Security\AuthUser;
 final class SecurityService implements Security
 {
     public function __construct(
-        private readonly SecurityComponent $security,
+        private readonly \Symfony\Bundle\SecurityBundle\Security $security,
     ) {
     }
 

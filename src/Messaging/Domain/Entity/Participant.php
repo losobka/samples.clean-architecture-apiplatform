@@ -12,9 +12,9 @@ use App\User\Domain\ValueObject\UserId;
 
 class Participant
 {
-    private ParticipantId $id;
-    private ParticipantName $name;
-    private UserId $userId;
+    private readonly ParticipantId $id;
+    private readonly ParticipantName $name;
+    private readonly UserId $userId;
     private bool $isArchived;
 
     private function __construct(

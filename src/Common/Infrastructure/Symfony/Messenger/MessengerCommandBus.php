@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Common\Infrastructure\Symfony\Messenger;
 
+use Throwable;
 use App\Common\Application\Command\CommandBus;
 use App\Common\Application\Command\Command;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
@@ -20,17 +21,17 @@ final class MessengerCommandBus implements CommandBus
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function dispatch(Command $command): mixed
     {
         try {
             return $this->handle($command);
         } catch (HandlerFailedException $e) {
-            /** @var array{0: \Throwable} $exceptions */
-            $exceptions = $e->getNestedExceptions();
+            /** @var array{0: Throwable} $exceptions */
+            $exceptions = $e->getWrappedExceptions();
 
-            throw $exceptions[0];
+            throw current($exceptions);
         }
     }
 }

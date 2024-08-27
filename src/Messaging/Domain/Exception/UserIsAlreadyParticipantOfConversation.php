@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Messaging\Domain\Exception;
 
+use DomainException;
 use App\Messaging\Domain\ValueObject\ConversationId;
 use App\User\Domain\ValueObject\UserId;
 
-final class UserIsAlreadyParticipantOfConversation extends \DomainException
+final class UserIsAlreadyParticipantOfConversation extends DomainException
 {
     public function __construct(UserId $userId, ConversationId $conversationId)
     {

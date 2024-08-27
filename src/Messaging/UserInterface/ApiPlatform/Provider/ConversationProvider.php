@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Messaging\UserInterface\ApiPlatform\Provider;
 
+use InvalidArgumentException;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use App\Common\Application\Query\QueryBus;
@@ -27,7 +28,7 @@ final class ConversationProvider implements ProviderInterface
         try {
             $conversationId = (string) $uriVariables['id'];
             $conversationDTO = $this->getConversationById($conversationId);
-        } catch (\InvalidArgumentException $exception) {
+        } catch (InvalidArgumentException $exception) {
             throw new HttpException(400, $exception->getMessage());
         }
 

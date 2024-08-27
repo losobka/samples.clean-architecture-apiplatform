@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Authentication\Application\UseCase\Signup;
 
+use RuntimeException;
 use App\Authentication\Application\DTO\AuthTokenDTO;
 use App\Authentication\Application\Service\AuthTokenCreator;
 use App\Authentication\Domain\Entity\UserCredential;
@@ -34,7 +35,8 @@ final class SignupCommandHandler implements CommandHandler
      */
     public function __invoke(SignupCommand $command): AuthTokenDTO
     {
-        $this->ensurePasswordConfirmIsValid(Password::fromString($command->password), Password::fromString($command->passwordConfirm));
+        $this->ensurePasswordConfirmIsValid(Password::fromString($command->password), Password::fromString
+        (value: $command->passwordConfirm, ensureIsStrength: false));
         $this->ensureUsernameIsAvailable(Username::fromString($command->email));
 
         // User is created first for generate UserId to use in creating of credentials
@@ -58,7 +60,7 @@ final class SignupCommandHandler implements CommandHandler
     private function ensurePasswordConfirmIsValid(Password $password, Password $passwordConfirm): void
     {
         if (!$password->isEqual($passwordConfirm)) {
-            throw new \RuntimeException('Invalid password confirm');
+            throw new RuntimeException('Invalid password confirm');
         }
     }
 

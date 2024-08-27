@@ -29,8 +29,6 @@ final class SearchUsersPaginatedQueryHandler implements QueryHandler
      */
     private function mapUsersToUsersDTOs(array $users): array
     {
-        return array_map(static function (User $user) {
-            return UserDTO::fromEntity($user);
-        }, $users);
+        return array_map(static fn(User $user) => UserDTO::fromEntity($user), $users);
     }
 }

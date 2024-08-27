@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Authentication\Application\UseCase\Login;
 
+use Exception;
 use App\Authentication\Application\DTO\AuthTokenDTO;
 use App\Authentication\Application\Service\AuthTokenCreator;
 use App\Authentication\Domain\Exception\InvalidCredentials;
@@ -33,7 +34,7 @@ final class LoginCommandHandler implements CommandHandler
     {
         try {
             $userCredential = $this->userCredentialRepository->getByUsername(Username::fromString($command->username));
-        } catch (\Exception) {
+        } catch (Exception) {
             throw new InvalidCredentials();
         }
 

@@ -29,8 +29,6 @@ final class SearchConversationsPaginatedQueryHandler implements QueryHandler
      */
     private function mapConversationsToConversationsDTOs(array $conversations): array
     {
-        return array_map(static function (Conversation $conversation) {
-            return ConversationDTO::fromEntity($conversation);
-        }, $conversations);
+        return array_map(static fn(Conversation $conversation) => ConversationDTO::fromEntity($conversation), $conversations);
     }
 }

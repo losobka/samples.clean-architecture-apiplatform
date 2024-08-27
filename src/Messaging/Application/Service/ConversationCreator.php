@@ -37,8 +37,6 @@ final class ConversationCreator
     private function getUsersDTOsFromUsersIds(array $usersIds): array
     {
         /** @var UserDTO[] $users */
-        return array_map(function (string $userId) {
-            return $this->queryBus->ask(new GetUserByIdQuery(userId: $userId));
-        }, $usersIds);
+        return array_map(fn(string $userId) => $this->queryBus->ask(new GetUserByIdQuery(userId: $userId)), $usersIds);
     }
 }

@@ -6,33 +6,25 @@ namespace App\Messaging\Domain\Entity;
 
 use App\Messaging\Domain\ValueObject\MessageContent;
 use App\Messaging\Domain\ValueObject\MessageId;
-use Carbon\Carbon;
+use App\Common\Domain\ValueObject\DateTime;
 
 class Message
 {
-    private MessageId $id;
-    private Conversation $conversation;
-    private MessageContent $content;
-    private Carbon $sentAt;
-    private Participant $sentBy;
+    private readonly MessageId $id;
 
     private function __construct(
-        Conversation $conversation,
-        MessageContent $content,
-        Carbon $sentAt,
-        Participant $sentBy,
+        private readonly Conversation $conversation,
+        private readonly MessageContent $content,
+        private readonly DateTime $sentAt,
+        private readonly Participant $sentBy,
     ) {
         $this->id = MessageId::generate();
-        $this->conversation = $conversation;
-        $this->content = $content;
-        $this->sentAt = $sentAt;
-        $this->sentBy = $sentBy;
     }
 
     public static function create(
         Conversation $conversation,
         MessageContent $content,
-        Carbon $sentAt,
+        DateTime $sentAt,
         Participant $sentBy,
     ): self {
         return new self(
@@ -63,7 +55,7 @@ class Message
         return $this->sentBy;
     }
 
-    public function sentAt(): Carbon
+    public function sentAt(): DateTime
     {
         return $this->sentAt;
     }

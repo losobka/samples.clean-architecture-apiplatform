@@ -32,8 +32,6 @@ final class ConversationDTO
      */
     private static function mapParticipantsToParticipantsDTOs(array $participants): array
     {
-        return array_map(static function (Participant $participant) {
-            return ParticipantDTO::fromEntity($participant);
-        }, $participants);
+        return array_map(static fn(Participant $participant) => ParticipantDTO::fromEntity($participant), $participants);
     }
 }

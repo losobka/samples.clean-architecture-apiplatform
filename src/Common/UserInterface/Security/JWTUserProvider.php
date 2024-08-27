@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Common\UserInterface\Security;
 
+use Exception;
 use App\Authentication\Application\UseCase\GetAuthUserFromToken\GetAuthUserFromTokenQuery;
 use App\Common\Application\Query\QueryBus;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
@@ -36,7 +37,7 @@ final class JWTUserProvider implements UserProviderInterface
                         token: self::extractToken($identifier),
                     )
                 );
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw new CustomUserMessageAuthenticationException($exception->getMessage());
         }
 

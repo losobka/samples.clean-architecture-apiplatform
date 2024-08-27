@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Authentication\Application\DTO;
 
-final class AuthTokenDTO implements \Stringable
+use Stringable;
+
+final class AuthTokenDTO implements Stringable
 {
     private function __construct(
         public readonly string $token,

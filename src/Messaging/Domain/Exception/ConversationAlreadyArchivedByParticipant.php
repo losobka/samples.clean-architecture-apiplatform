@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Messaging\Domain\Exception;
 
+use DomainException;
 use App\Messaging\Domain\Entity\Conversation;
 
-final class ConversationAlreadyArchivedByParticipant extends \DomainException
+final class ConversationAlreadyArchivedByParticipant extends DomainException
 {
     public function __construct(Conversation $conversation)
     {

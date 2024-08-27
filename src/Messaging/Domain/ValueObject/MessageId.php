@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Messaging\Domain\ValueObject;
 
-use App\Common\Domain\ValueObject\Uuid;
+use App\Common\Domain\ValueObject\Ulid;
 
-final class MessageId extends Uuid
+final class MessageId extends Ulid
 {
 }

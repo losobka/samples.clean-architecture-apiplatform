@@ -56,8 +56,6 @@ class MessagesProvider implements ProviderInterface
      */
     private function mapMessagesDTOsToMessagesResources(array $messagesDTOs): array
     {
-        return array_map(static function (MessageDTO $messageDTO) {
-            return MessageResource::fromMessageDTO($messageDTO);
-        }, $messagesDTOs);
+        return array_map(static fn(MessageDTO $messageDTO) => MessageResource::fromMessageDTO($messageDTO), $messagesDTOs);
     }
 }

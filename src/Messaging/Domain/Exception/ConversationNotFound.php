@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Messaging\Domain\Exception;
 
+use DomainException;
 use App\Messaging\Domain\ValueObject\ConversationId;
 
-final class ConversationNotFound extends \DomainException
+final class ConversationNotFound extends DomainException
 {
     public function __construct(ConversationId $conversationId)
     {

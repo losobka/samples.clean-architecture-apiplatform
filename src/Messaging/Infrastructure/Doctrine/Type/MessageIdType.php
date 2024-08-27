@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Messaging\Infrastructure\Doctrine\Type;
 
+use App\Common\Infrastructure\Doctrine\Type\UlidType;
 use App\Messaging\Domain\ValueObject\MessageId;
-use App\Common\Infrastructure\Doctrine\Type\UuidType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
-class MessageIdType extends UuidType
+class MessageIdType extends UlidType
 {
     public const TYPE = 'message_id';
 

@@ -40,8 +40,6 @@ final class GetMessagesQueryHandler implements QueryHandler
      */
     private function mapMessagesToMessagesDTOs(array $messages): array
     {
-        return array_map(static function (Message $message) {
-            return MessageDTO::fromEntity($message);
-        }, $messages);
+        return array_map(static fn(Message $message) => MessageDTO::fromEntity($message), $messages);
     }
 }

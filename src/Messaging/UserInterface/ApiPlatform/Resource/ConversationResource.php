@@ -68,8 +68,6 @@ final class ConversationResource
      */
     private static function mapParticipantsDTOsToParticipantsResources(array $participantsDTOs): array
     {
-        return array_map(static function (ParticipantDTO $participantDTO) {
-            return ParticipantResource::fromParticipantDTO($participantDTO);
-        }, $participantsDTOs);
+        return array_map(static fn(ParticipantDTO $participantDTO) => ParticipantResource::fromParticipantDTO($participantDTO), $participantsDTOs);
     }
 }

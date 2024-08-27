@@ -1,4 +1,4 @@
-DC = DOCKER_BUILDKIT=1 docker-compose
+DC = DOCKER_BUILDKIT=1 docker compose
 EXEC = $(DC) exec api_php
 COMPOSER = $(EXEC) composer
 
