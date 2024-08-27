@@ -36,7 +36,7 @@ services:
       - "80:80"
       - "443:443"
     environment:
-      TZ: "Europe/Paris"
+      TZ: "Europe/Warsaw"
     networks:
       traefik-network:
         aliases:
