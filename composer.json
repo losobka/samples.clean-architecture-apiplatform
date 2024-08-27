@@ -17,10 +17,11 @@
         "ext-openssl": "*",
         "ext-zend-opcache": "*",
         "api-platform/core": "^3.3",
-        "doctrine/annotations": "^1.14",
+        "doctrine/annotations": "^2",
+
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.14",
+        "doctrine/orm": "^3",
         "firebase/php-jwt": "^6.3",
         "guzzlehttp/guzzle": "^7.5",
         "nelmio/cors-bundle": "^2.2",
