@@ -49,3 +49,9 @@ tests:
 	@$(EXEC) bin/phpunit $@
 
 .PHONY: tests
+
+lint:
+	@$(EXEC) vendor/bin/php-cs-fixer fix --diff
+	@$(EXEC) vendor/bin/rector process --debug
+
+.PHONY: tests
