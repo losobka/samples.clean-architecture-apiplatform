@@ -2,15 +2,21 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\Application\UseCase\SendMessage;
 
 use App\Common\Application\Command\Command;
 
-final class SendMessageCommand implements Command
+final readonly class SendMessageCommand implements Command
 {
     public function __construct(
-        public readonly string $conversationId,
-        public readonly string $messageContent,
+        public string $conversationId,
+        public string $messageContent,
     ) {
     }
 }

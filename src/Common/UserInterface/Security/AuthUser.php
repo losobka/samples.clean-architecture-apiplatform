@@ -2,15 +2,21 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Common\UserInterface\Security;
 
 use App\Authentication\Application\DTO\AuthUserDTO;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class AuthUser implements UserInterface
+final readonly class AuthUser implements UserInterface
 {
     private function __construct(
-        private readonly AuthUserDTO $authUserDTO,
+        private AuthUserDTO $authUserDTO,
     ) {
     }
 

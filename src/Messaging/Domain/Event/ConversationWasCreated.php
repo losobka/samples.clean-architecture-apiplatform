@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\Domain\Event;
 
 use App\Common\Domain\Event\DomainEvent;

@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\User\UserInterface\ApiPlatform\Resource;
 
 use ApiPlatform\Metadata\ApiProperty;
@@ -35,31 +41,30 @@ use Symfony\Component\Validator\Constraints as Assert;
         ),
     ],
 )]
-final class UserResource
+final readonly class UserResource
 {
     public function __construct(
         #[ApiProperty(readable: true, writable: false, identifier: true)]
         #[Groups(groups: ['read'])]
-        public readonly string $id = '',
+        public string $id = '',
 
         #[Assert\Length(min: 1, max: 255)]
         #[Assert\NotNull(groups: ['register', 'create'])]
         #[Groups(groups: ['read', 'create'])]
-        public readonly string $firstName = '',
+        public string $firstName = '',
 
         #[Assert\Length(min: 1, max: 255)]
         #[Assert\NotNull(groups: ['register', 'create'])]
         #[Groups(groups: ['read', 'create'])]
-        public readonly string $lastName = '',
+        public string $lastName = '',
 
         #[Assert\Length(min: 1, max: 255)]
         #[Assert\Email]
         #[Assert\NotNull(groups: ['register', 'create'])]
         #[Groups(groups: ['read', 'create'])]
-        public readonly string $email = '',
+        public string $email = '',
     ) {
     }
-
     public static function fromUserDTO(UserDTO $userDTO): UserResource
     {
         return new self(

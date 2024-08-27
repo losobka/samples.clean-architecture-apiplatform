@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\Application\Service;
 
 use App\Common\Application\Query\QueryBus;
@@ -11,11 +17,11 @@ use App\Messaging\Domain\Repository\ConversationRepository;
 use App\User\Application\DTO\UserDTO;
 use App\User\Application\UseCase\GetUserById\GetUserByIdQuery;
 
-final class ConversationCreator
+final readonly class ConversationCreator
 {
     public function __construct(
-        private readonly ConversationRepository $conversationRepository,
-        private readonly QueryBus $queryBus,
+        private ConversationRepository $conversationRepository,
+        private QueryBus $queryBus,
     ) {
     }
 

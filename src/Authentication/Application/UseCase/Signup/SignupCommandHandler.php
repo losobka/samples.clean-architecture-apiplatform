@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Authentication\Application\UseCase\Signup;
 
 use RuntimeException;
@@ -20,13 +26,13 @@ use App\User\Application\DTO\UserDTO;
 use App\User\Application\UseCase\CreateUser\CreateUserCommand;
 use App\User\Domain\ValueObject\UserId;
 
-final class SignupCommandHandler implements CommandHandler
+final readonly class SignupCommandHandler implements CommandHandler
 {
     public function __construct(
-        private readonly CommandBus $commandBus,
-        private readonly PasswordHasher $passwordHasher,
-        private readonly UserCredentialRepository $userCredentialRepository,
-        private readonly AuthTokenCreator $authTokenCreator,
+        private CommandBus $commandBus,
+        private PasswordHasher $passwordHasher,
+        private UserCredentialRepository $userCredentialRepository,
+        private AuthTokenCreator $authTokenCreator,
     ) {
     }
 

@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\Application\UseCase\SearchConversationsPaginated;
 
 use App\Common\Application\Query\QueryHandler;
@@ -9,10 +15,10 @@ use App\Messaging\Application\DTO\ConversationDTO;
 use App\Messaging\Domain\Entity\Conversation;
 use App\Messaging\Domain\Repository\ConversationRepository;
 
-final class SearchConversationsPaginatedQueryHandler implements QueryHandler
+final readonly class SearchConversationsPaginatedQueryHandler implements QueryHandler
 {
     public function __construct(
-        private readonly ConversationRepository $conversationRepository,
+        private ConversationRepository $conversationRepository,
     ) {
     }
 

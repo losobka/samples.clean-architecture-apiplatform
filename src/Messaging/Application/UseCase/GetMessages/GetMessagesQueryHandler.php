@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\Application\UseCase\GetMessages;
 
 use App\Common\Application\Query\QueryHandler;
@@ -10,10 +16,10 @@ use App\Messaging\Domain\Entity\Message;
 use App\Messaging\Domain\Repository\MessageRepository;
 use App\Messaging\Domain\ValueObject\ConversationId;
 
-final class GetMessagesQueryHandler implements QueryHandler
+final readonly class GetMessagesQueryHandler implements QueryHandler
 {
     public function __construct(
-        private readonly MessageRepository $messageRepository,
+        private MessageRepository $messageRepository,
     ) {
     }
 

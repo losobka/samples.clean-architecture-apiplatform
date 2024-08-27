@@ -2,16 +2,22 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\Application\DTO;
 
 use App\Messaging\Domain\Entity\Participant;
 
-final class ParticipantDTO
+final readonly class ParticipantDTO
 {
     private function __construct(
-        public readonly string $id,
-        public readonly string $name,
-        public readonly string $userId,
+        public string $id,
+        public string $name,
+        public string $userId,
     ) {
     }
 

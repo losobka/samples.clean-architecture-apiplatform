@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\User\Application\UseCase\GetUserById;
 
 use App\Common\Application\Query\QueryHandler;
@@ -10,10 +16,10 @@ use App\User\Domain\Exception\UserNotFound;
 use App\User\Domain\Repository\UserRepository;
 use App\User\Domain\ValueObject\UserId;
 
-final class GetUserByIdQueryHandler implements QueryHandler
+final readonly class GetUserByIdQueryHandler implements QueryHandler
 {
     public function __construct(
-        private readonly UserRepository $userRepository,
+        private UserRepository $userRepository,
     ) {
     }
 

@@ -2,27 +2,33 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Authentication\UserInterface\ApiPlatform\Payload;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class Signup
+final readonly class Signup
 {
     public function __construct(
         #[Assert\NotNull(groups: ['signup'])]
-        public readonly string $firstName,
+        public string $firstName,
 
         #[Assert\NotNull(groups: ['signup'])]
-        public readonly string $lastName,
+        public string $lastName,
 
         #[Assert\NotNull(groups: ['signup'])]
-        public readonly string $email,
+        public string $email,
 
         #[Assert\NotNull(groups: ['signup'])]
-        public readonly string $password,
+        public string $password,
 
         #[Assert\NotNull(groups: ['signup'])]
-        public readonly string $passwordConfirm,
+        public string $passwordConfirm,
     ) {
     }
 }

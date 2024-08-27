@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\Domain\Entity;
 
 use App\Authentication\Application\DTO\AuthUserDTO;
@@ -123,7 +129,7 @@ class Conversation extends AggregateRoot
 
     private function ensureHasEnoughParticipants(array $users): void
     {
-        if (count($users) < self::MIN_PARTICIPANTS) {
+        if (self::MIN_PARTICIPANTS > count($users)) {
             throw new NotEnoughParticipants(self::MIN_PARTICIPANTS, count($users));
         }
     }

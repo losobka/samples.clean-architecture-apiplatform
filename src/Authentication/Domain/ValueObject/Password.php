@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Authentication\Domain\ValueObject;
 
 use App\Common\Domain\Exception\InvalidFormat;
@@ -69,6 +75,6 @@ final class Password extends StringValue
 
     private function hasValidLength(string $password): bool
     {
-        return strlen($password) >= self::MIN_LENGTH;
+        return self::MIN_LENGTH <= strlen($password);
     }
 }

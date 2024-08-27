@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\UserInterface\ApiPlatform\Provider;
 
 use ApiPlatform\Metadata\Operation;
@@ -15,11 +21,11 @@ use App\Messaging\UserInterface\ApiPlatform\Resource\ConversationResource;
 /**
  * @template-implements ProviderInterface<ConversationResource>
  */
-final class ConversationsProvider implements ProviderInterface
+final readonly class ConversationsProvider implements ProviderInterface
 {
     public function __construct(
-        private readonly QueryBus $queryBus,
-        private readonly Pagination $pagination,
+        private QueryBus $queryBus,
+        private Pagination $pagination,
     ) {
     }
 

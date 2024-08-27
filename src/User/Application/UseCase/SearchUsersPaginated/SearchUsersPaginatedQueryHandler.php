@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\User\Application\UseCase\SearchUsersPaginated;
 
 use App\Common\Application\Query\QueryHandler;
@@ -9,10 +15,10 @@ use App\User\Application\DTO\UserDTO;
 use App\User\Domain\Entity\User;
 use App\User\Domain\Repository\UserRepository;
 
-final class SearchUsersPaginatedQueryHandler implements QueryHandler
+final readonly class SearchUsersPaginatedQueryHandler implements QueryHandler
 {
     public function __construct(
-        private readonly UserRepository $userRepository,
+        private UserRepository $userRepository,
     ) {
     }
 

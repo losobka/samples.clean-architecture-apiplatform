@@ -2,14 +2,20 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Authentication\UserInterface\ApiPlatform\Output;
 
 use App\Authentication\Application\DTO\AuthTokenDTO;
 
-final class JWT
+final readonly class JWT
 {
     private function __construct(
-        public readonly string $token,
+        public string $token,
     ) {
     }
 

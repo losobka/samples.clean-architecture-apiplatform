@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Common\UserInterface\Security;
 
 use Exception;
@@ -11,10 +17,10 @@ use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationExc
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-final class JWTUserProvider implements UserProviderInterface
+final readonly class JWTUserProvider implements UserProviderInterface
 {
     public function __construct(
-        private readonly QueryBus $queryBus,
+        private QueryBus $queryBus,
     ) {
     }
 
@@ -51,7 +57,7 @@ final class JWTUserProvider implements UserProviderInterface
     {
         $explodeAuthHeader = explode(' ', $identifier);
 
-        if (2 !== count($explodeAuthHeader) || $explodeAuthHeader[0] !== 'Bearer') {
+        if (2 !== count($explodeAuthHeader) || 'Bearer' !== $explodeAuthHeader[0]) {
             throw new CustomUserMessageAuthenticationException();
         }
 

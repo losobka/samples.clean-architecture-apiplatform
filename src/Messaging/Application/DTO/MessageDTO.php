@@ -2,17 +2,23 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\Application\DTO;
 
 use App\Messaging\Domain\Entity\Message;
 
-final class MessageDTO
+final readonly class MessageDTO
 {
     private function __construct(
-        public readonly string $id,
-        public readonly string $content,
-        public readonly ParticipantDTO $sentBy,
-        public readonly string $sentAt,
+        public string $id,
+        public string $content,
+        public ParticipantDTO $sentBy,
+        public string $sentAt,
     ) {
     }
 

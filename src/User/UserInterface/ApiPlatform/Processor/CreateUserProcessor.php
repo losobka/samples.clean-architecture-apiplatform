@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\User\UserInterface\ApiPlatform\Processor;
 
 use ApiPlatform\Metadata\Operation;
@@ -15,10 +21,10 @@ use App\User\UserInterface\ApiPlatform\Resource\UserResource;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Webmozart\Assert\Assert;
 
-final class CreateUserProcessor implements ProcessorInterface
+final readonly class CreateUserProcessor implements ProcessorInterface
 {
     public function __construct(
-        private readonly CommandBus $commandBus,
+        private CommandBus $commandBus,
     ) {
     }
 

@@ -2,15 +2,21 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Authentication\Application\Service;
 
 use App\Authentication\Application\DTO\AuthTokenDTO;
 use App\User\Application\DTO\UserDTO;
 
-final class AuthTokenCreator
+final readonly class AuthTokenCreator
 {
     public function __construct(
-        private readonly TokenEncoder $tokenEncoder,
+        private TokenEncoder $tokenEncoder,
     ) {
     }
 

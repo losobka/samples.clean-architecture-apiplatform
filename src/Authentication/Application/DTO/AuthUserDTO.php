@@ -2,17 +2,23 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Authentication\Application\DTO;
 
 use App\User\Application\DTO\UserDTO;
 
-final class AuthUserDTO
+final readonly class AuthUserDTO
 {
     private function __construct(
-        public readonly string $userId,
-        public readonly string $firstName,
-        public readonly string $lastName,
-        public readonly string $email,
+        public string $userId,
+        public string $firstName,
+        public string $lastName,
+        public string $email,
     ) {
     }
 

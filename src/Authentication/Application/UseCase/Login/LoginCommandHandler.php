@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Authentication\Application\UseCase\Login;
 
 use Exception;
@@ -17,13 +23,13 @@ use App\Common\Application\Query\QueryBus;
 use App\User\Application\DTO\UserDTO;
 use App\User\Application\UseCase\GetUserById\GetUserByIdQuery;
 
-final class LoginCommandHandler implements CommandHandler
+final readonly class LoginCommandHandler implements CommandHandler
 {
     public function __construct(
-        private readonly QueryBus $queryBus,
-        private readonly UserCredentialRepository $userCredentialRepository,
-        private readonly PasswordHasher $passwordHasher,
-        private readonly AuthTokenCreator $authTokenCreator,
+        private QueryBus $queryBus,
+        private UserCredentialRepository $userCredentialRepository,
+        private PasswordHasher $passwordHasher,
+        private AuthTokenCreator $authTokenCreator,
     ) {
     }
 

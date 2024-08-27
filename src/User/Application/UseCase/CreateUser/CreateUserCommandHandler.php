@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\User\Application\UseCase\CreateUser;
 
 use App\Common\Application\Command\CommandHandler;
@@ -14,10 +20,10 @@ use App\User\Domain\Entity\User;
 use App\User\Domain\Exception\EmailAlreadyUsed;
 use App\User\Domain\Repository\UserRepository;
 
-final class CreateUserCommandHandler implements CommandHandler
+final readonly class CreateUserCommandHandler implements CommandHandler
 {
     public function __construct(
-        private readonly UserRepository $userRepository,
+        private UserRepository $userRepository,
     ) {
     }
 

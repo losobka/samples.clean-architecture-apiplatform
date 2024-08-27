@@ -2,18 +2,24 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Authentication\Application\UseCase\Signup;
 
 use App\Common\Application\Command\Command;
 
-final class SignupCommand implements Command
+final readonly class SignupCommand implements Command
 {
     public function __construct(
-        public readonly string $firstName,
-        public readonly string $lastName,
-        public readonly string $email,
-        public readonly string $password,
-        public readonly string $passwordConfirm,
+        public string $firstName,
+        public string $lastName,
+        public string $email,
+        public string $password,
+        public string $passwordConfirm,
     ) {
     }
 }

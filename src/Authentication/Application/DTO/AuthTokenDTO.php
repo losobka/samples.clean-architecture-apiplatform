@@ -2,14 +2,20 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Authentication\Application\DTO;
 
 use Stringable;
 
-final class AuthTokenDTO implements Stringable
+final readonly class AuthTokenDTO implements Stringable
 {
     private function __construct(
-        public readonly string $token,
+        public string $token,
     ) {
     }
 

@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Authentication\UserInterface\ApiPlatform\Processor;
 
 use ApiPlatform\Metadata\Operation;
@@ -13,10 +19,10 @@ use App\Authentication\UserInterface\ApiPlatform\Payload\Signup;
 use App\Common\Application\Command\CommandBus;
 use Webmozart\Assert\Assert;
 
-final class SignupProcessor implements ProcessorInterface
+final readonly class SignupProcessor implements ProcessorInterface
 {
     public function __construct(
-        private readonly CommandBus $commandBus,
+        private CommandBus $commandBus,
     ) {
     }
 

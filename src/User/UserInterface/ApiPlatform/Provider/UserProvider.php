@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\User\UserInterface\ApiPlatform\Provider;
 
 use ApiPlatform\Metadata\Operation;
@@ -16,10 +22,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * @template-implements ProviderInterface<UserResource>
  */
-final class UserProvider implements ProviderInterface
+final readonly class UserProvider implements ProviderInterface
 {
     public function __construct(
-        private readonly QueryBus $queryBus,
+        private QueryBus $queryBus,
     ) {
     }
 

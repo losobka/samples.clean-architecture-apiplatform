@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Authentication\Infrastructure\Symfony\Service;
 
 use OpenSSLAsymmetricKey;
@@ -10,13 +16,13 @@ use App\Authentication\Application\Service\TokenEncoder;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-final class TokenService implements TokenDecoder, TokenEncoder
+final readonly class TokenService implements TokenDecoder, TokenEncoder
 {
     private const JWT_ALGORITHM = 'RS256';
 
     public function __construct(
-        private readonly string $jwtPrivateKey,
-        private readonly string $jwtPublicKey,
+        private string $jwtPrivateKey,
+        private string $jwtPublicKey,
     ) {
     }
 

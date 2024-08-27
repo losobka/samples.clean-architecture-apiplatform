@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Common\Infrastructure\Symfony\Security;
 
 use App\Authentication\Application\DTO\AuthUserDTO;
@@ -9,10 +15,10 @@ use App\Common\Application\Session\Security;
 use Symfony\Component\Security\Core\Security as SecurityComponent;
 use App\Common\UserInterface\Security\AuthUser;
 
-final class SecurityService implements Security
+final readonly class SecurityService implements Security
 {
     public function __construct(
-        private readonly \Symfony\Bundle\SecurityBundle\Security $security,
+        private \Symfony\Bundle\SecurityBundle\Security $security,
     ) {
     }
 

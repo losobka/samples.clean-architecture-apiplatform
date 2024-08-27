@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\Application\UseCase\SendMessage;
 
 use App\Common\Application\Command\CommandHandler;
@@ -10,11 +16,11 @@ use App\Messaging\Domain\Repository\ConversationRepository;
 use App\Messaging\Domain\ValueObject\ConversationId;
 use App\Messaging\Domain\ValueObject\MessageContent;
 
-final class SendMessageCommandHandler implements CommandHandler
+final readonly class SendMessageCommandHandler implements CommandHandler
 {
     public function __construct(
-        private readonly ConversationRepository $conversationRepository,
-        private readonly MessageCreator $messageCreator,
+        private ConversationRepository $conversationRepository,
+        private MessageCreator $messageCreator,
     ) {
     }
 

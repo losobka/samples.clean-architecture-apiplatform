@@ -2,14 +2,20 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\Application\UseCase\GetConversation;
 
 use App\Common\Application\Query\Query;
 
-final class GetConversationQuery implements Query
+final readonly class GetConversationQuery implements Query
 {
     public function __construct(
-        public readonly string $conversationId,
+        public string $conversationId,
     ) {
     }
 }

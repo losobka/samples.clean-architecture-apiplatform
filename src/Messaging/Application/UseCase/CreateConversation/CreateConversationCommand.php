@@ -2,14 +2,20 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\Application\UseCase\CreateConversation;
 
 use App\Common\Application\Command\Command;
 
-final class CreateConversationCommand implements Command
+final readonly class CreateConversationCommand implements Command
 {
     public function __construct(
-        private readonly array $members = [],
+        private array $members = [],
     ) {
     }
 

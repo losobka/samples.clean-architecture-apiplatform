@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\UserInterface\ApiPlatform\Provider;
 
 use InvalidArgumentException;
@@ -16,10 +22,10 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * @template-implements ProviderInterface<ConversationResource>
  */
-final class ConversationProvider implements ProviderInterface
+final readonly class ConversationProvider implements ProviderInterface
 {
     public function __construct(
-        private readonly QueryBus $queryBus,
+        private QueryBus $queryBus,
     ) {
     }
 

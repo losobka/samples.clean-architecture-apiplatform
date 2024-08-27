@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Common\Domain\ValueObject;
 
 use DateTime as BaseDateTime;
@@ -17,6 +23,6 @@ class DateTime extends BaseDateTime
     }
     public function toAtomString(): string
     {
-        return $this->format(\DateTime::ATOM);
+        return $this->format(BaseDateTime::ATOM);
     }
 }

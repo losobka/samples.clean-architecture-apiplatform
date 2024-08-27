@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Authentication\Infrastructure\Doctrine\Repository;
 
 use App\Authentication\Domain\Entity\UserCredential;

@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * webapp.api
+ *
+ * (c) 2024 Łukasz Osóbka
+ */
+
 namespace App\Messaging\UserInterface\ApiPlatform\Processor;
 
 use ApiPlatform\Metadata\Operation;
@@ -12,10 +18,10 @@ use App\Messaging\Application\UseCase\CreateConversation\CreateConversationComma
 use App\Messaging\UserInterface\ApiPlatform\Resource\ConversationResource;
 use Webmozart\Assert\Assert;
 
-final class CreateConversationProcessor implements ProcessorInterface
+final readonly class CreateConversationProcessor implements ProcessorInterface
 {
     public function __construct(
-        private readonly CommandBus $commandBus,
+        private CommandBus $commandBus,
     ) {
     }
 
