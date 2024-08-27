@@ -35,6 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             provider: UserProvider::class,
         ),
         new Post(
+            inputFormats: ['json' => 'application/json'],
             openapi: new Operation(summary: 'Create user'),
             denormalizationContext: ['groups' => ['create']],
             validationContext: ['groups' => ['create']],

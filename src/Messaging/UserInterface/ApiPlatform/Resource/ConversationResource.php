@@ -38,6 +38,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             provider: ConversationProvider::class,
         ),
         new Post(
+            inputFormats: ['json' => 'application/json'],
             openapi: new Operation(summary: 'Create new conversation.'),
             denormalizationContext: ['groups' => 'create'],
             validationContext: ['groups' => ['create']],

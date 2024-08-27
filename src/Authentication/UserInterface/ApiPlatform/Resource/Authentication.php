@@ -24,6 +24,7 @@ use App\Authentication\UserInterface\ApiPlatform\Processor\SignupProcessor;
     operations: [
         new Post(
             '/login',
+            inputFormats: ['json' => 'application/json'],
             openapi: new Operation(summary: 'Login'),
             validationContext: ['groups' => ['login']],
             input: Login::class,
@@ -32,6 +33,7 @@ use App\Authentication\UserInterface\ApiPlatform\Processor\SignupProcessor;
         ),
         new Post(
             '/signup',
+            inputFormats: ['json' => 'application/json'],
             openapi: new Operation(summary: 'Signup'),
             validationContext: ['groups' => ['create', 'signup']],
             input: Signup::class,

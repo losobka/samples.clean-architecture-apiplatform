@@ -27,6 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new Post(
             '/conversations/{id}/messages',
+            inputFormats: ['json' => 'application/json'],
             status: 201,
             openapi: new Operation(summary: 'Send message to conversation.'),
             denormalizationContext: ['groups' => 'create'],
