@@ -14,6 +14,8 @@ services:
       - host.docker.internal:host-gateway
 
   api_caddy:
+    environment:
+      DEBUG: ${CADDY_DEBUG}
     volumes:
       - ./public:/srv/app/public:ro
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
