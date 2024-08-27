@@ -110,6 +110,7 @@ RUN set -eux; \
 	apk del .build-deps
 
 RUN rm -f .env.local.php
+RUN ln -s /usr/bin/composer /srv/app/bin/composer
 
 FROM caddy:2-builder-alpine AS api_caddy_builder
 
