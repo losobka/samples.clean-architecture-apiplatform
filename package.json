@@ -7,6 +7,9 @@
   },
   "name": "api-webapp",
   "private": true,
-  "version": "1.2.2",
-  "repository": "https://github.com/losobka/samples.clean-architecture-apiplatform.git"
+  "version": "1.3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/losobka/samples.clean-architecture-apiplatform.git"
+  }
 }
