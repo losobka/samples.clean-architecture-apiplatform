@@ -14,25 +14,22 @@ use App\Authentication\Domain\Event\UserPasswordHasBeenChanged;
 use App\Authentication\Domain\Exception\NewPasswordShouldBeDifferentOfCurrentPassword;
 use App\Authentication\Domain\ValueObject\HashedPassword;
 use App\Authentication\Domain\ValueObject\Username;
+use App\Common\Domain\ValueObject\Ulid;
 use App\User\Domain\Entity\User;
-use App\User\Domain\ValueObject\UserId;
 
 class UserCredential
 {
-    private readonly UserId $id;
+    private readonly Ulid $id;
 
     private function __construct(
-//        private readonly UserId $id,
         private readonly User $user,
-//        private readonly UserId $user,
         private Username $username,
         private HashedPassword $hashedPassword,
     ) {
-        $this->id = UserId::generate();
+        $this->id = Ulid::generate();
     }
 
     public static function create(
-//        UserId $id,
         User $user,
         Username $username,
         HashedPassword $hashedPassword,
@@ -40,7 +37,7 @@ class UserCredential
         return new self($user,$username, $hashedPassword);
     }
 
-    public function id(): UserId
+    public function id(): Ulid
     {
         return $this->id;
     }

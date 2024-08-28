@@ -15,6 +15,7 @@ doctrine:
             firstname: App\Common\Infrastructure\Doctrine\Type\FirstNameType
             lastname: App\Common\Infrastructure\Doctrine\Type\LastNameType
             email: App\Common\Infrastructure\Doctrine\Type\EmailType
+            ulid: App\Common\Infrastructure\Doctrine\Type\UlidType
 
             # Authentication
             username: App\Authentication\Infrastructure\Doctrine\Type\UsernameType

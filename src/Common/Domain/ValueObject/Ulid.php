@@ -14,7 +14,7 @@ use Stringable;
 use InvalidArgumentException;
 use Symfony\Component\Uid\Ulid as SymfonyUlid;
 
-abstract class Ulid implements Stringable
+class Ulid implements Stringable
 {
     private function __construct(protected SymfonyUlid $value)
     {
@@ -23,9 +23,7 @@ abstract class Ulid implements Stringable
 
     public static function generate(): static
     {
-//        return new static(SymfonyUlid::generate());
         return new static(new SymfonyUlid);
-//        return new static(RamseyUuid::uuid4()->toString());
     }
 
     public static function fromString(string $value): static
@@ -33,9 +31,9 @@ abstract class Ulid implements Stringable
         return new static(SymfonyUlid::fromString($value));
     }
 
-    public function value(): string
+    public function value(): SymfonyUlid
     {
-        return $this->value->toRfc4122();
+        return $this->value;
     }
 
     public function equals(mixed $other): bool
@@ -45,7 +43,7 @@ abstract class Ulid implements Stringable
 
     public function __toString(): string
     {
-        return $this->value();
+        return $this->value()->toRfc4122();
     }
 
     private function ensureIsValidUlid(SymfonyUlid $id): void
