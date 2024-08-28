@@ -21,3 +21,4 @@ api_platform:
         \App\Common\Domain\Exception\ValidationFailed: 400
         \App\Common\Domain\Exception\LogicFailed: 400
         \App\Common\Domain\Exception\ResourceNotFound: 404
+        \Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400
