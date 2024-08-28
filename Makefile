@@ -46,7 +46,7 @@ tests:
 	@$(EXEC) bin/console doctrine:database:drop --force --env=test || true
 	@$(EXEC) bin/console doctrine:database:create --env=test
 	@$(EXEC) bin/console doctrine:schema:create --env=test
-	@$(EXEC) bin/phpunit $@
+	@$(EXEC) vendor/bin/phpunit $@
 
 .PHONY: tests
 
