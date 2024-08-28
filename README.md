@@ -1,4 +1,4 @@
-# Clean Architecture with Symfony 6.1 / ApiPlatform 3.0
+# Clean Architecture with Symfony 7.1 / ApiPlatform 3.3
 
 ## Implementation study of CleanArchitecture through the must elegant way with using PHP Symfony & ApiPlatform
 
@@ -68,6 +68,6 @@ Actually with too refactorings, I don't think it the time to implement quality t
 
 - Writing functional tests with control of OpenAPI specifications
 - Add deptrack control to ensure that layers rules dependencies aren't violated.
-- Add PHP static analyzer.
-- Add workflow to operate check of previous installed tools on each pull request.
+- [x] ~Add PHP static analyzer.~
+- [x] ~Add workflow to operate check of previous installed tools on each pull request.~
 - ...
