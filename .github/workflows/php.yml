@@ -11,9 +11,19 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    
+    services:
+        postgres:
+            image: postgres:14-alpine
+            env:
+                POSTGRES_USER: postgres
+                POSTGRES_PASSWORD: postgres
+                POSTGRES_DB: db_test
+            ports:
+                - 5432/tcp
+            options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    
     steps:
     - uses: actions/checkout@v4
       
@@ -23,7 +33,15 @@ jobs:
           php-version: '8.3'
           extensions: zip, intl, apcu, opcache, pdo_pgsql, mbstring, intl. xdebug
           coverage: xdebug
-          tools: 
+      env:
+          DATABASE_USER: postgres
+          DATABASE_PASSWORD: postgres
+          DATABASE_DB: db_test
+          DATABASE_NAME: db_test
+          DATABASE_HOST: 127.0.0.1
+          DATABASE_PORT: 5432
+          DATABASE_DRIVER: pdo_pgsql
+          DATABASE_SERVER_VERSION: 14
 
     - name: Cache Composer packages
       id: composer-cache
@@ -35,16 +53,22 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Install dependencies
-      run: composer install --prefer-dist --dev --no-progress
+      run: composer install --prefer-dist --dev --no-progress --optimize-autoloader
+      
+    - name: Prepare database enviroment
+      run: |
+        php bin/console doctrine:database:drop --force --env=test --no-interaction || true
+        php bin/console doctrine:database:create --env=test --no-interaction
+        php bin/console doctrine:schema:create --env=test --no-interaction
 
-    - name: Run test suites
+    - name: Run phpunit test suites
       run: vendor/bin/phpunit
 
     - name: Run php-cs-fixer
-      run: vendor/bin/php-cs-fixer fix --dry-run --debug
+      run: vendor/bin/php-cs-fixer fix --dry-run --debug -vvv
       
     - name: Run reactor
-      run: vendor/bin/rector process --dry-run
+      run: vendor/bin/rector process --dry-run -vvv
 
     - name: Run phpstan
       run: vendor/bin/phpstan -vvv
