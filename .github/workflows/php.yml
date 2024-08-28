@@ -16,6 +16,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+          php-version: '8.3'
+          extensions: zip, intl, apcu, opcache, pdo_pgsql, mbstring, intl. xdebug
+          coverage: xdebug
+          tools: 
 
     - name: Cache Composer packages
       id: composer-cache
@@ -27,7 +35,16 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Install dependencies
-      run: composer install --dev --prefer-dist --no-progress
+      run: composer install --prefer-dist --dev --no-autoloader --no-scripts --no-progress
 
-    - name: Run test suite
+    - name: Run test suites
       run: vendor/bin/phpunit
+
+    - name: Run php-cs-fixer
+      run: vendor/bin/php-cs-fixer fix --dry-run --debug
+      
+    - name: Run reactor
+      run: vendor/bin/rector process --dry-run
+
+    - name: Run phpstan
+      run: vendor/bin/phpstan -vvv
