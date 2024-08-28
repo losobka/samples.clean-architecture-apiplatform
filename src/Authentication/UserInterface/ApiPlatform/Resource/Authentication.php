@@ -26,11 +26,7 @@ use App\Authentication\UserInterface\ApiPlatform\Processor\SignupProcessor;
         new Post(
             '/login',
             inputFormats: ['json' => 'application/json'],
-            openapi: new Operation(summary: 'Login', description: 'Authenticates a user', responses: [201 => new
-            Response
-(description:
-            'Login
-            successful')]),
+            openapi: new Operation(responses: [201 => new Response(description:  'Login successful')], summary: 'Login', description: 'Authenticates a user'),
             validationContext: ['groups' => ['login']],
             input: Login::class,
             output: JWT::class,
