@@ -67,6 +67,7 @@ final readonly class UserResource
         public string $email = '',
     ) {
     }
+
     public static function fromUserDTO(UserDTO $userDTO): UserResource
     {
         return new self(

@@ -15,7 +15,7 @@ use App\Common\Domain\ValueObject\StringValue;
 
 final class HashedPassword extends StringValue
 {
-    private const BCRYPT_PATTERN = '/^\$2[ayb]\$.{56}$/';
+    private const string BCRYPT_PATTERN = '/^\$2[ayb]\$.{56}$/';
 
     /**
      * @throws InvalidFormat
@@ -36,7 +36,7 @@ final class HashedPassword extends StringValue
         $hashedPassword = $this->value;
 
         if (!preg_match(self::BCRYPT_PATTERN, $hashedPassword)) {
-            throw new InvalidFormat('The hashed password isn\'t bcrypt encoded format');
+            throw new InvalidFormat("The hashed password isn't bcrypt encoded format");
         }
     }
 }

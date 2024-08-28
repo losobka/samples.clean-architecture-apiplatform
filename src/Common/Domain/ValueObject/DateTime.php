@@ -21,6 +21,7 @@ class DateTime extends BaseDateTime
     {
         return new self();
     }
+
     public function toAtomString(): string
     {
         return $this->format(BaseDateTime::ATOM);

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Messaging\UserInterface\ApiPlatform\Provider;
 
+use Override;
 use InvalidArgumentException;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
@@ -29,13 +30,14 @@ final readonly class ConversationProvider implements ProviderInterface
     ) {
     }
 
+    #[Override]
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
         try {
             $conversationId = (string) $uriVariables['id'];
             $conversationDTO = $this->getConversationById($conversationId);
-        } catch (InvalidArgumentException $exception) {
-            throw new HttpException(400, $exception->getMessage());
+        } catch (InvalidArgumentException $invalidArgumentException) {
+            throw new HttpException(400, $invalidArgumentException->getMessage());
         }
 
         return ConversationResource::fromConversationDTO($conversationDTO);

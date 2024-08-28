@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Common\Domain\ValueObject;
 
+use Override;
 use Stringable;
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid as RamseyUuid;
@@ -41,6 +42,7 @@ abstract class Uuid implements Stringable
         return (string) $this === (string) $other;
     }
 
+    #[Override]
     public function __toString(): string
     {
         return $this->value();

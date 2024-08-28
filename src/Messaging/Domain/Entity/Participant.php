@@ -19,9 +19,12 @@ use App\User\Domain\ValueObject\UserId;
 class Participant
 {
     private readonly ParticipantId $id;
+
     private readonly ParticipantName $name;
+
     private readonly UserId $userId;
-    private bool $isArchived;
+
+    private bool $isArchived = false;
 
     private function __construct(
         readonly UserDTO $userDTO,
@@ -30,7 +33,6 @@ class Participant
         $this->id = ParticipantId::generate();
         $this->userId = UserId::fromString($this->userDTO->id);
         $this->name = ParticipantName::fromUserDTO($this->userDTO);
-        $this->isArchived = false;
     }
 
     public static function create(

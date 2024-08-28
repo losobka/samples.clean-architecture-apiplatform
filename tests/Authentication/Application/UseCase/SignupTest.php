@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Authentication\Application\UseCase;
 
+use Override;
 use App\Authentication\Application\DTO\AuthTokenDTO;
 use App\Authentication\Application\UseCase\Signup\SignupCommand;
 use App\Authentication\Domain\Repository\UserCredentialRepository;
@@ -22,7 +23,8 @@ final class SignupTest extends KernelTestCase
 
     private UserCredentialRepository $userCredentialRepository;
 
-    public function setUp(): void
+    #[Override]
+    protected function setUp(): void
     {
         parent::setUp();
 

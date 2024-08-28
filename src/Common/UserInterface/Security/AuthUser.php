@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Common\UserInterface\Security;
 
+use Override;
 use App\Authentication\Application\DTO\AuthUserDTO;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -30,15 +31,18 @@ final readonly class AuthUser implements UserInterface
         return $this->authUserDTO;
     }
 
+    #[Override]
     public function getRoles(): array
     {
         return ['ROLE_USER'];
     }
 
+    #[Override]
     public function eraseCredentials(): void
     {
     }
 
+    #[Override]
     public function getUserIdentifier(): string
     {
         return $this->authUserDTO->userId;

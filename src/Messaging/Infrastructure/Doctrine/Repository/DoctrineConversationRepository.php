@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Messaging\Infrastructure\Doctrine\Repository;
 
+use Override;
 use App\Messaging\Domain\Entity\Conversation;
 use App\Messaging\Domain\Exception\ConversationNotFound;
 use App\Messaging\Domain\Repository\ConversationRepository;
@@ -30,11 +31,13 @@ class DoctrineConversationRepository extends ServiceEntityRepository implements 
         parent::__construct($registry, Conversation::class);
     }
 
+    #[Override]
     public function add(Conversation $conversation): void
     {
         $this->getEntityManager()->persist($conversation);
     }
 
+    #[Override]
     public function remove(Conversation $conversation): void
     {
         $this->getEntityManager()->remove($conversation);
@@ -43,6 +46,7 @@ class DoctrineConversationRepository extends ServiceEntityRepository implements 
     /**
      * @throws ConversationNotFound
      */
+    #[Override]
     public function get(ConversationId $conversationId): Conversation
     {
         /** @var ?Conversation $conversation */
@@ -54,6 +58,7 @@ class DoctrineConversationRepository extends ServiceEntityRepository implements 
         return $conversation;
     }
 
+    #[Override]
     public function search(int $pageNumber, int $itemsPerPage): array
     {
         $queryBuilder = $this->createQueryBuilder(self::ALIAS);

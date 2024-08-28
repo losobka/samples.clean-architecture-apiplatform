@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Common\Domain\ValueObject;
 
+use Override;
 use Stringable;
 use InvalidArgumentException;
 use Symfony\Component\Uid\Ulid as SymfonyUlid;
@@ -41,6 +42,7 @@ class Ulid implements Stringable
         return (string) $this === (string) $other;
     }
 
+    #[Override]
     public function __toString(): string
     {
         return $this->value()->toRfc4122();

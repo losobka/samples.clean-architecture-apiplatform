@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Common\Infrastructure\Symfony\Messenger;
 
+use Override;
 use Throwable;
 use App\Common\Application\Query\QueryBus;
 use App\Common\Application\Query\Query;
@@ -26,13 +27,14 @@ final class MessengerQueryBus implements QueryBus
         $this->messageBus = $queryBus;
     }
 
+    #[Override]
     public function ask(Query $query): mixed
     {
         try {
             return $this->handle($query);
-        } catch (HandlerFailedException $e) {
+        } catch (HandlerFailedException $handlerFailedException) {
             /** @var array{0: Throwable} $exceptions */
-            $exceptions = $e->getWrappedExceptions();
+            $exceptions = $handlerFailedException->getWrappedExceptions();
 
             throw current($exceptions);
         }

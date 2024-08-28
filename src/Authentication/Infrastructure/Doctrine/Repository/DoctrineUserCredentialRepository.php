@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Authentication\Infrastructure\Doctrine\Repository;
 
+use Override;
 use App\Authentication\Domain\Entity\UserCredential;
 use App\Authentication\Domain\Exception\CredentialNotFoundForUsername;
 use App\Authentication\Domain\Repository\UserCredentialRepository;
@@ -22,13 +23,14 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class DoctrineUserCredentialRepository extends ServiceEntityRepository implements UserCredentialRepository
 {
-    private const ALIAS = 'user_credential';
+    private const string ALIAS = 'user_credential';
 
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, UserCredential::class);
     }
 
+    #[Override]
     public function getByUsername(Username $username): UserCredential
     {
         $expressionBuilder = $this->getEntityManager()->getExpressionBuilder();
@@ -47,6 +49,7 @@ final class DoctrineUserCredentialRepository extends ServiceEntityRepository imp
         return $userCredential;
     }
 
+    #[Override]
     public function add(UserCredential $userCredential): void
     {
         $this->getEntityManager()->persist($userCredential);

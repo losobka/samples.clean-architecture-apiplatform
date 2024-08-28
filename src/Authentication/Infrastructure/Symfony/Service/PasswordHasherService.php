@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Authentication\Infrastructure\Symfony\Service;
 
+use Override;
 use App\Authentication\Domain\Service\PasswordHasher;
 use App\Authentication\Domain\ValueObject\HashedPassword;
 use App\Authentication\Domain\ValueObject\Password;
@@ -27,6 +28,7 @@ final class PasswordHasherService implements PasswordHasher
     ) {
     }
 
+    #[Override]
     public function hash(Password $password): HashedPassword
     {
         if ($this->isPasswordTooLong((string) $password)) {
@@ -36,6 +38,7 @@ final class PasswordHasherService implements PasswordHasher
         return HashedPassword::fromString($this->passwordHasher->hash((string) $password));
     }
 
+    #[Override]
     public function verify(HashedPassword $hashedPassword, Password $plainPassword): bool
     {
         return $this->passwordHasher->verify((string) $hashedPassword, (string) $plainPassword);

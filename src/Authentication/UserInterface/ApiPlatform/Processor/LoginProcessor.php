@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Authentication\UserInterface\ApiPlatform\Processor;
 
+use Override;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Authentication\Application\DTO\AuthTokenDTO;
@@ -26,6 +27,7 @@ final readonly class LoginProcessor implements ProcessorInterface
     ) {
     }
 
+    #[Override]
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): JWT
     {
         Assert::isInstanceOf($data, Login::class);

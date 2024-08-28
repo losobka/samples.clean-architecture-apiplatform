@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Common\Infrastructure\Symfony\Messenger;
 
+use Override;
 use Throwable;
 use App\Common\Application\Command\CommandBus;
 use App\Common\Application\Command\Command;
@@ -29,13 +30,14 @@ final class MessengerCommandBus implements CommandBus
     /**
      * @throws Throwable
      */
+    #[Override]
     public function dispatch(Command $command): mixed
     {
         try {
             return $this->handle($command);
-        } catch (HandlerFailedException $e) {
+        } catch (HandlerFailedException $handlerFailedException) {
             /** @var array{0: Throwable} $exceptions */
-            $exceptions = $e->getWrappedExceptions();
+            $exceptions = $handlerFailedException->getWrappedExceptions();
 
             throw current($exceptions);
         }

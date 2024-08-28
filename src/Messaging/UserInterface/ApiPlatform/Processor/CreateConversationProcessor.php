@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Messaging\UserInterface\ApiPlatform\Processor;
 
+use Override;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Common\Application\Command\CommandBus;
@@ -25,6 +26,7 @@ final readonly class CreateConversationProcessor implements ProcessorInterface
     ) {
     }
 
+    #[Override]
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): ConversationResource
     {
         Assert::isInstanceOf($data, ConversationResource::class);

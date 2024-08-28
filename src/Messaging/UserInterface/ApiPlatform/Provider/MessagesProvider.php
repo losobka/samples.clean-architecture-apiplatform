@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Messaging\UserInterface\ApiPlatform\Provider;
 
+use Override;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\Pagination\Pagination;
 use ApiPlatform\State\ProviderInterface;
@@ -32,6 +33,7 @@ class MessagesProvider implements ProviderInterface
     /**
      * @return MessageResource[]
      */
+    #[Override]
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): array
     {
         $conversationId = (string) $uriVariables['id'];

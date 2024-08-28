@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\User\UserInterface\ApiPlatform\Processor;
 
+use Override;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Common\Application\Command\CommandBus;
@@ -28,6 +29,7 @@ final readonly class CreateUserProcessor implements ProcessorInterface
     ) {
     }
 
+    #[Override]
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): UserResource
     {
         Assert::isInstanceOf($data, UserResource::class);

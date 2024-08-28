@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Common\UserInterface\Security;
 
+use Override;
 use Exception;
 use App\Authentication\Application\UseCase\GetAuthUserFromToken\GetAuthUserFromTokenQuery;
 use App\Common\Application\Query\QueryBus;
@@ -24,23 +25,26 @@ final readonly class JWTUserProvider implements UserProviderInterface
     ) {
     }
 
+    #[Override]
     public function refreshUser(UserInterface $user): UserInterface
     {
         return $this->loadUserByIdentifier($user->getUserIdentifier());
     }
 
+    #[Override]
     public function supportsClass(string $class): bool
     {
         return AuthUser::class === $class;
     }
 
+    #[Override]
     public function loadUserByIdentifier(string $identifier): AuthUser
     {
         try {
             $authUserDTO = $this->queryBus
                 ->ask(
                     new GetAuthUserFromTokenQuery(
-                        token: self::extractToken($identifier),
+                        token: $this->extractToken($identifier),
                     )
                 );
         } catch (Exception $exception) {
@@ -53,7 +57,7 @@ final readonly class JWTUserProvider implements UserProviderInterface
     /**
      * @throws CustomUserMessageAuthenticationException
      */
-    private static function extractToken(string $identifier): string
+    private function extractToken(string $identifier): string
     {
         $explodeAuthHeader = explode(' ', $identifier);
 

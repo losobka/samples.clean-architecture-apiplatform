@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Common\Domain\ValueObject;
 
+use Override;
 use App\Common\Domain\Exception\InvalidFormat;
 
 final class Email extends StringValue
@@ -27,9 +28,10 @@ final class Email extends StringValue
     /**
      * @throws InvalidFormat
      */
+    #[Override]
     public static function fromString(string $value): static
     {
-        return new static($value);
+        return new self($value);
     }
 
     /**

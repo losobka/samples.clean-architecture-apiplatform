@@ -15,7 +15,7 @@ use App\Common\Domain\ValueObject\StringValue;
 
 final class JWTToken extends StringValue
 {
-    private const JWT_PATTERN = '/^([a-zA-Z0-9_=]+)\.([a-zA-Z0-9_=]+)\.([a-zA-Z0-9_\-+\/=]*)/';
+    private const string JWT_PATTERN = '/^([a-zA-Z0-9_=]+)\.([a-zA-Z0-9_=]+)\.([a-zA-Z0-9_\-+\/=]*)/';
 
     /**
      * @throws InvalidFormat
@@ -36,7 +36,7 @@ final class JWTToken extends StringValue
         $token = $this->value;
 
         if (!preg_match(self::JWT_PATTERN, $token)) {
-            throw new InvalidFormat('The token isn\'t JWT format');
+            throw new InvalidFormat("The token isn't JWT format");
         }
     }
 }

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Common\Domain\ValueObject;
 
+use Override;
 use Stringable;
 
 abstract class StringValue implements Stringable
@@ -28,6 +29,7 @@ abstract class StringValue implements Stringable
         return $this->value;
     }
 
+    #[Override]
     public function __toString(): string
     {
         return $this->value();

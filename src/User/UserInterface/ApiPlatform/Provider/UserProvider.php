@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\User\UserInterface\ApiPlatform\Provider;
 
+use Override;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use App\Common\Application\Query\QueryBus;
@@ -29,13 +30,14 @@ final readonly class UserProvider implements ProviderInterface
     ) {
     }
 
+    #[Override]
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
         try {
             $userId = (string) $uriVariables['id'];
             $userDTO = $this->getUserById($userId);
-        } catch (UserNotFound $exception) {
-            throw new NotFoundHttpException($exception->getMessage());
+        } catch (UserNotFound $userNotFound) {
+            throw new NotFoundHttpException($userNotFound->getMessage());
         }
 
         return UserResource::fromUserDTO($userDTO);

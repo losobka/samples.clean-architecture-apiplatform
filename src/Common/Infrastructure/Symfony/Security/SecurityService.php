@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Common\Infrastructure\Symfony\Security;
 
+use Override;
 use App\Authentication\Application\DTO\AuthUserDTO;
 use App\Common\Application\Session\Security;
 use App\Common\UserInterface\Security\AuthUser;
@@ -21,11 +22,13 @@ final readonly class SecurityService implements Security
     ) {
     }
 
+    #[Override]
     public function isAuthenticated(): bool
     {
-        return null !== $this->connectedUser();
+        return $this->connectedUser() instanceof AuthUserDTO;
     }
 
+    #[Override]
     public function connectedUser(): ?AuthUserDTO
     {
         $authenticatedUser = $this->security->getUser();

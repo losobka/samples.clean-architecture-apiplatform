@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Messaging\UserInterface\ApiPlatform\Provider;
 
+use Override;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\Pagination\Pagination;
 use ApiPlatform\State\ProviderInterface;
@@ -29,6 +30,7 @@ final readonly class ConversationsProvider implements ProviderInterface
     ) {
     }
 
+    #[Override]
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): array
     {
         $page = $this->pagination->getPage($context);

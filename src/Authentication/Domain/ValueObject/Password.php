@@ -10,12 +10,13 @@ declare(strict_types=1);
 
 namespace App\Authentication\Domain\ValueObject;
 
+use Override;
 use App\Common\Domain\Exception\InvalidFormat;
 use App\Common\Domain\ValueObject\StringValue;
 
 final class Password extends StringValue
 {
-    private const MIN_LENGTH = 8;
+    private const int MIN_LENGTH = 8;
 
     /**
      * @throws InvalidFormat
@@ -26,13 +27,15 @@ final class Password extends StringValue
     ) {
         parent::__construct($password);
 
-        if ($ensureIsStrength)
+        if ($ensureIsStrength) {
             $this->ensureIsStrength();
+        }
     }
 
+    #[Override]
     public static function fromString(string $value, bool $ensureIsStrength = true): static
     {
-        return new static($value, $ensureIsStrength);
+        return new self($value, $ensureIsStrength);
     }
 
     /**

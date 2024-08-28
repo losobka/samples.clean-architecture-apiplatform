@@ -10,12 +10,14 @@ declare(strict_types=1);
 
 namespace App\Authentication\Domain\Event;
 
+use Override;
 use App\Common\Domain\Event\DomainEvent;
 
 final class UserHasBeenRemoved extends DomainEvent
 {
-    public const EVENT_NAME = 'user.user_has_been_removed';
+    public const string EVENT_NAME = 'user.user_has_been_removed';
 
+    #[Override]
     public static function eventName(): string
     {
         return self::EVENT_NAME;

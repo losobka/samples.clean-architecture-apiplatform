@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Authentication\Application\DTO;
 
+use Override;
 use Stringable;
 
 final readonly class AuthTokenDTO implements Stringable
@@ -24,6 +25,7 @@ final readonly class AuthTokenDTO implements Stringable
         return new self(token: $token);
     }
 
+    #[Override]
     public function __toString(): string
     {
         return $this->token;

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\Doctrine\Repository;
 
+use Override;
 use App\Common\Domain\ValueObject\Email;
 use App\User\Domain\Entity\User;
 use App\User\Domain\Exception\UserNotFound;
@@ -26,13 +27,14 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class DoctrineUserRepository extends ServiceEntityRepository implements UserRepository
 {
-    private const ALIAS = 'user';
+    private const string ALIAS = 'user';
 
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
     }
 
+    #[Override]
     public function add(User $user): void
     {
         $this->getEntityManager()->persist($user);
@@ -41,6 +43,7 @@ final class DoctrineUserRepository extends ServiceEntityRepository implements Us
     /**
      * @throws UserNotFound
      */
+    #[Override]
     public function get(UserId $id): User
     {
         /** @var ?User $user */
@@ -52,6 +55,7 @@ final class DoctrineUserRepository extends ServiceEntityRepository implements Us
         return $user;
     }
 
+    #[Override]
     public function emailExist(Email $email): bool
     {
         $userWithEmail = $this->findOneBy(['email' => $email]);
@@ -59,6 +63,7 @@ final class DoctrineUserRepository extends ServiceEntityRepository implements Us
         return (null !== $userWithEmail);
     }
 
+    #[Override]
     public function search(int $pageNumber, int $itemsPerPage): array
     {
         $queryBuilder = $this->createQueryBuilder(self::ALIAS);

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\Doctrine\Type;
 
+use Override;
 use App\User\Domain\ValueObject\UserStatus;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
@@ -19,6 +20,7 @@ class UserStatusType extends StringType
 {
     public const TYPE = 'user_status';
 
+    #[Override]
     public function convertToPHPValue($value, AbstractPlatform $platform): ?UserStatus
     {
         if (null === $value) {
@@ -28,6 +30,7 @@ class UserStatusType extends StringType
         return UserStatus::tryFrom((string) $value);
     }
 
+    #[Override]
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if (null === $value) {
@@ -41,11 +44,13 @@ class UserStatusType extends StringType
         return $userStatus->value;
     }
 
+    #[Override]
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }
 
+    #[Override]
     public function getName(): string
     {
         return self::TYPE;

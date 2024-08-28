@@ -27,6 +27,7 @@ class User extends AggregateRoot
     private readonly DateTime $createdAt;
 
     private ?DateTime $removedAt = null;
+
     private ?DateTime $lastLoginAt = null;
 
     private function __construct(
@@ -82,7 +83,7 @@ class User extends AggregateRoot
 
     public function isRemoved(): bool
     {
-        return null !== $this->removedAt;
+        return $this->removedAt instanceof DateTime;
     }
 
     public function login(): void

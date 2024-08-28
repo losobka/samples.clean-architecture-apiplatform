@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\User\UserInterface\ApiPlatform\Provider;
 
+use Override;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\Pagination\Pagination;
 use ApiPlatform\State\ProviderInterface;
@@ -32,6 +33,7 @@ final readonly class UsersProvider implements ProviderInterface
     /**
      * @return UserResource[]
      */
+    #[Override]
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): array
     {
         $page = $this->pagination->getPage($context);

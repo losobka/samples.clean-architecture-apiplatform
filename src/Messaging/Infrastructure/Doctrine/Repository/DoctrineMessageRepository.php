@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Messaging\Infrastructure\Doctrine\Repository;
 
+use Override;
 use App\Messaging\Domain\Entity\Message;
 use App\Messaging\Domain\Repository\MessageRepository;
 use App\Messaging\Domain\ValueObject\ConversationId;
@@ -31,6 +32,7 @@ class DoctrineMessageRepository extends ServiceEntityRepository implements Messa
     /**
      * @return Message[]
      */
+    #[Override]
     public function searchByConversationId(ConversationId $conversationId, int $page, int $itemsPerPage): array
     {
         $queryBuilder = $this->createQueryBuilder(self::ALIAS);
