@@ -1,4 +1,8 @@
 security:
+    password_hashers:
+        App\User\Domain\Entity\User:
+            algorithm: auto
+    
     providers:
         jwt_user_provider:
             id: App\Common\UserInterface\Security\JWTUserProvider
