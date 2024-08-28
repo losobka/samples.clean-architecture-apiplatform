@@ -67,7 +67,7 @@ jobs:
                   DATABASE_SERVER_VERSION: 14
 
             - name: Run phpunit test suites
-              run: vendor/bin/phpunit
+              run: vendor/bin/phpunit --colors=always
               env:
                   DATABASE_USER: postgres
                   DATABASE_PASSWORD: postgres
@@ -78,10 +78,10 @@ jobs:
                   DATABASE_SERVER_VERSION: 14
 
             - name: Run php-cs-fixer
-              run: vendor/bin/php-cs-fixer fix --dry-run --diff -vvv
+              run: vendor/bin/php-cs-fixer fix --dry-run --diff -vvv --no-interaction --show-progress=dots --ansi
 
             - name: Run reactor
-              run: vendor/bin/rector process --dry-run -vvv
+              run: vendor/bin/rector process --dry-run -vvv --ansi 
 #
 #            - name: Run phpstan
 #              run: vendor/bin/phpstan -vvv
