@@ -1,83 +1,82 @@
 name: PHP Composer
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    push:
+        branches: [ "master" ]
+    pull_request:
+        branches: [ "master" ]
 
 permissions:
-  contents: read
+    contents: read
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    
-    services:
-        postgres:
-            image: postgres:14-alpine
-            env:
-                POSTGRES_USER: postgres
-                POSTGRES_PASSWORD: postgres
-                POSTGRES_DB: db_test
-            ports:
-                - 5432/tcp
-            options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-    
-    steps:
-    - uses: actions/checkout@v4
-      
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-          php-version: '8.3'
-          extensions: zip, intl, apcu, opcache, pdo_pgsql, mbstring, intl. xdebug
-          coverage: xdebug
+    build:
+        runs-on: ubuntu-latest
+        
+        services:
+            postgres:
+                image: postgres:14-alpine
+                env:
+                    POSTGRES_USER: postgres
+                    POSTGRES_PASSWORD: postgres
+                    POSTGRES_DB: db_test
+                ports:
+                    - 5432/tcp
+                options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        
+        steps:
+            - uses: actions/checkout@v4
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.3'
+                  extensions: zip, intl, apcu, opcache, pdo_pgsql, mbstring, intl. xdebug
+                  coverage: xdebug
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --dev --no-progress --optimize-autoloader
-      
-    - name: Prepare database enviroment
-      run: |
-        php bin/console doctrine:database:drop --force --env=test --no-interaction || true
-        php bin/console doctrine:database:create --env=test --no-interaction
-        php bin/console doctrine:schema:create --env=test --no-interaction
-      env:
-          DATABASE_USER: postgres
-          DATABASE_PASSWORD: postgres
-          DATABASE_DB: db_test
-          DATABASE_NAME: db_test
-          DATABASE_HOST: 127.0.0.1
-          DATABASE_PORT: 5432
-          DATABASE_DRIVER: pdo_pgsql
-          DATABASE_SERVER_VERSION: 14
+            - name: Cache Composer packages
+              id: composer-cache
+              uses: actions/cache@v3
+              with:
+                  path: vendor
+                  key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-php-
 
-    - name: Run phpunit test suites
-      run: vendor/bin/phpunit
-      env:
-          DATABASE_USER: postgres
-          DATABASE_PASSWORD: postgres
-          DATABASE_DB: db_test
-          DATABASE_NAME: db_test
-          DATABASE_HOST: 127.0.0.1
-          DATABASE_PORT: 5432
-          DATABASE_DRIVER: pdo_pgsql
-          DATABASE_SERVER_VERSION: 14
+            - name: Install dependencies
+              run: composer install --prefer-dist --dev --no-progress --optimize-autoloader
 
-    - name: Run php-cs-fixer
-      run: vendor/bin/php-cs-fixer fix --dry-run --debug -vvv
-      
-    - name: Run reactor
-      run: vendor/bin/rector process --dry-run -vvv
+            - name: Prepare database enviroment
+              run: |
+                  php bin/console doctrine:database:drop --force --env=test --no-interaction || true
+                  php bin/console doctrine:database:create --env=test --no-interaction
+                  php bin/console doctrine:schema:create --env=test --no-interaction
+              env:
+                  DATABASE_USER: postgres
+                  DATABASE_PASSWORD: postgres
+                  DATABASE_DB: db_test
+                  DATABASE_NAME: db_test
+                  DATABASE_HOST: 127.0.0.1
+                  DATABASE_PORT: 5432
+                  DATABASE_DRIVER: pdo_pgsql
+                  DATABASE_SERVER_VERSION: 14
 
-    - name: Run phpstan
-      run: vendor/bin/phpstan -vvv
+            - name: Run phpunit test suites
+              run: vendor/bin/phpunit
+              env:
+                  DATABASE_USER: postgres
+                  DATABASE_PASSWORD: postgres
+                  DATABASE_NAME: db_test
+                  DATABASE_HOST: 127.0.0.1
+                  DATABASE_PORT: ${{ job.services.postgres.ports[5432] }}
+                  DATABASE_DRIVER: pdo_pgsql
+                  DATABASE_SERVER_VERSION: 14
+
+            - name: Run php-cs-fixer
+              run: vendor/bin/php-cs-fixer fix --dry-run --debug -vvv
+
+            - name: Run reactor
+              run: vendor/bin/rector process --dry-run -vvv
+
+            - name: Run phpstan
+              run: vendor/bin/phpstan -vvv
