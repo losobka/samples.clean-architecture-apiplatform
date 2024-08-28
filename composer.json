@@ -18,7 +18,6 @@
         "ext-zend-opcache": "*",
         "api-platform/core": "^3.3",
         "doctrine/annotations": "^2",
-
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^3",
@@ -109,7 +108,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.63",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^10",
         "rector/rector": "^1.2",
         "roave/security-advisories": "dev-latest",
         "symfony/browser-kit": "^7.1",
