@@ -45,7 +45,7 @@ final class SignupTest extends KernelTestCase
         $authTokenDTO = $this->handle($signupCommand);
 
         $this->assertInstanceOf(AuthTokenDTO::class, $authTokenDTO);
-        $this->assertObjectHasAttribute('token', $authTokenDTO);
+        $this->assertObjectHasProperty('token', $authTokenDTO);
 
         $token = $authTokenDTO->token;
         $this->assertNotEmpty($token);

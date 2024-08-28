@@ -22,7 +22,7 @@ class DateTimeType extends BaseDateTimeType
         return self::TYPE;
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
         return new DateTime($value ?? 'now');
     }
