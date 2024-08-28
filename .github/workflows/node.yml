@@ -21,6 +21,6 @@ jobs:
       with:
           node-version: latest
     - run: npm install @semantic-release/git @semantic-release/changelog -D
-    - run: npx semantic-release --ci=false --publish
+    - run: npx semantic-release
       env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
