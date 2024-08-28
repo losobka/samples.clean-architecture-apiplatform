@@ -54,9 +54,8 @@ jobs:
               env:
                   DATABASE_USER: postgres
                   DATABASE_PASSWORD: postgres
-                  DATABASE_DB: db_test
                   DATABASE_NAME: db_test
-                  DATABASE_HOST: 127.0.0.1
+                  DATABASE_HOST: 0.0.0.0
                   DATABASE_PORT: 5432
                   DATABASE_DRIVER: pdo_pgsql
                   DATABASE_SERVER_VERSION: 14
