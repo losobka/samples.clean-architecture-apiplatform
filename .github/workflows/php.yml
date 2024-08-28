@@ -35,7 +35,7 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Install dependencies
-      run: composer install --prefer-dist --dev --no-autoloader --no-scripts --no-progress
+      run: composer install --prefer-dist --dev --no-progress
 
     - name: Run test suites
       run: vendor/bin/phpunit
