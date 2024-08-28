@@ -13,6 +13,7 @@ namespace App\Authentication\UserInterface\ApiPlatform\Resource;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model\Operation;
+use ApiPlatform\OpenApi\Model\Response;
 use App\Authentication\UserInterface\ApiPlatform\Output\JWT;
 use App\Authentication\UserInterface\ApiPlatform\Payload\Login;
 use App\Authentication\UserInterface\ApiPlatform\Payload\Signup;
@@ -25,7 +26,11 @@ use App\Authentication\UserInterface\ApiPlatform\Processor\SignupProcessor;
         new Post(
             '/login',
             inputFormats: ['json' => 'application/json'],
-            openapi: new Operation(summary: 'Login'),
+            openapi: new Operation(summary: 'Login', description: 'Authenticates a user', responses: [201 => new
+            Response
+(description:
+            'Login
+            successful')]),
             validationContext: ['groups' => ['login']],
             input: Login::class,
             output: JWT::class,
