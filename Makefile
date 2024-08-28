@@ -52,6 +52,6 @@ tests:
 
 lint:
 	@$(EXEC) vendor/bin/php-cs-fixer fix --diff
-	@$(EXEC) vendor/bin/rector process --debug
+	@$(EXEC) vendor/bin/rector process --debug -vvv
 
-.PHONY: tests
+.PHONY: lint
