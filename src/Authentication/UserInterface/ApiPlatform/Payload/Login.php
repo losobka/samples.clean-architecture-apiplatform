@@ -15,10 +15,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 final readonly class Login
 {
     public function __construct(
-        #[Assert\NotNull(groups: ['login'])]
+        #[Assert\Email(groups: ['login'])]
         public string $email,
 
-        #[Assert\NotNull(groups: ['login'])]
+        #[Assert\Length(min: 8, groups: ['login'])]
         public string $password,
     ) {
     }

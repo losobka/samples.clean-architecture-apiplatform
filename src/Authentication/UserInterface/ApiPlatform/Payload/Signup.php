@@ -15,19 +15,19 @@ use Symfony\Component\Validator\Constraints as Assert;
 final readonly class Signup
 {
     public function __construct(
-        #[Assert\NotNull(groups: ['signup'])]
+        #[Assert\NotBlank(allowNull: false, groups: ['signup'])]
         public string $firstName,
 
-        #[Assert\NotNull(groups: ['signup'])]
+        #[Assert\NotBlank(allowNull: false, groups: ['signup'])]
         public string $lastName,
 
-        #[Assert\NotNull(groups: ['signup'])]
+        #[Assert\Email(groups: ['signup'])]
         public string $email,
 
-        #[Assert\NotNull(groups: ['signup'])]
+        #[Assert\Length(min: 8, groups: ['signup'])]
         public string $password,
 
-        #[Assert\NotNull(groups: ['signup'])]
+        #[Assert\IdenticalTo(propertyPath: 'password', groups: ['signup'])]
         public string $passwordConfirm,
     ) {
     }
