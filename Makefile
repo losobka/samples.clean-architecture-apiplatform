@@ -59,5 +59,6 @@ lint:
 release:
 	npm install @semantic-release/git @semantic-release/changelog -D
 	npx semantic-release --ci=false --publish
+	git push -f --tags
 
 .PHONY: release
