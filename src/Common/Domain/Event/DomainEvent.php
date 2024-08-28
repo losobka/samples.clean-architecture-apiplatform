@@ -65,6 +65,7 @@ abstract class DomainEvent
     }
 
     abstract public static function eventName(): string;
+
     /**
      * @return array{aggregateRootId: string, eventId: string, occurredOn: string}
      */
