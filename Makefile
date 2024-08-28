@@ -51,14 +51,13 @@ tests:
 .PHONY: tests
 
 lint:
-	@$(EXEC) vendor/bin/php-cs-fixer fix --diff
+	@$(EXEC) vendor/bin/php-cs-fixer fix --diff --dry-run
 	@$(EXEC) vendor/bin/rector process --debug -vvv
 
 .PHONY: lint
 
 release:
 	npm install @semantic-release/git @semantic-release/changelog -D
-	npx semantic-release --ci=false --publish
-	git push -f --tags
+	npx semantic-release
 
 .PHONY: release
