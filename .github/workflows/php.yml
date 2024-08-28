@@ -50,7 +50,7 @@ jobs:
               run: |
                   sh generate-jwt-keypair.sh
                   mkdir -p config/jwt
-                  cp docekr/jwt/* config/jwt
+                  cp docker/jwt/* config/jwt
 
             - name: Prepare database enviroment
               run: |
