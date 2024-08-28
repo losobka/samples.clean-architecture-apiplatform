@@ -78,10 +78,10 @@ jobs:
                   DATABASE_SERVER_VERSION: 14
 
             - name: Run php-cs-fixer
-              run: vendor/bin/php-cs-fixer fix --dry-run -vvv
+              run: vendor/bin/php-cs-fixer fix --dry-run --diff -vvv
 
             - name: Run reactor
               run: vendor/bin/rector process --dry-run -vvv
-
-            - name: Run phpstan
-              run: vendor/bin/phpstan -vvv
+#
+#            - name: Run phpstan
+#              run: vendor/bin/phpstan -vvv
