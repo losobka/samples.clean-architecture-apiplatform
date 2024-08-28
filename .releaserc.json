@@ -2,7 +2,7 @@
   "branches": [
     "master"
   ],
-  "repositoryUrl": "https://github.com/losobka/samples.clean-architecture-apiplatform",
+  "repositoryUrl": "git@github.com:losobka/samples.clean-architecture-apiplatform.git",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
