@@ -1,3 +1,11 @@
+## [1.2.2](https://github.com/losobka/samples.clean-architecture-apiplatform/compare/v1.2.1...v1.2.2) (2024-08-28)
+
+
+### Bug Fixes
+
+* updated git repository url ([28a31a5](https://github.com/losobka/samples.clean-architecture-apiplatform/commit/28a31a5bff90f19a4c9e20004294dde1007ad8ca))
+* updated php workflow ([1d6ac38](https://github.com/losobka/samples.clean-architecture-apiplatform/commit/1d6ac386839b80badd4feb057f3c29ae7d848179))
+
 ## [1.2.1](https://github.com/losobka/samples.clean-architecture-apiplatform/compare/v1.2.0...v1.2.1) (2024-08-28)
 
 
