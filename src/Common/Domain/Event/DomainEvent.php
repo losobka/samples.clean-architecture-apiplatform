@@ -16,7 +16,7 @@ use App\Common\Domain\ValueObject\EventId;
 
 abstract class DomainEvent
 {
-    private function __construct(
+    final public function __construct(
         private readonly AggregateRootId $aggregateRootId,
         private readonly EventId $eventId,
         private readonly DateTime $occurredOn,
@@ -60,12 +60,11 @@ abstract class DomainEvent
         return new static(
             aggregateRootId: AggregateRootId::fromString($aggregateRootId),
             eventId: EventId::fromString($eventId),
-            occurredOn: DateTime::fromSerialized($occurredOn),
+            occurredOn: DateTime::fromString($occurredOn),
         );
     }
 
     abstract public static function eventName(): string;
-
     /**
      * @return array{aggregateRootId: string, eventId: string, occurredOn: string}
      */
