@@ -1,0 +1,84 @@
+{
+  "branches": [
+    "master"
+  ],
+  "repositoryUrl": "https://github.com/losobka/samples.clean-architecture-apiplatform",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "angular",
+        "releaseRules": [
+          {
+            "type": "Remove",
+            "release": "patch"
+          },
+          {
+            "type": "Update",
+            "release": "patch"
+          },
+          {
+            "type": "Fix",
+            "release": "patch"
+          },
+          {
+            "type": "fix",
+            "release": "patch"
+          },
+          {
+            "type": "docs",
+            "release": "patch"
+          },
+          {
+            "type": "style",
+            "release": "patch"
+          },
+          {
+            "type": "test",
+            "release": "minor"
+          },
+          {
+            "type": "refactor",
+            "release": "patch"
+          },
+          {
+            "type": "Refactor",
+            "release": "patch"
+          },
+          {
+            "type": "feat",
+            "release": "minor"
+          }
+        ],
+        "parserOpts": {
+          "noteKeywords": [
+            "BREAKING CHANGE",
+            "BREAKING CHANGES"
+          ]
+        }
+      }
+    ],
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md"
+      }
+    ],
+    "@semantic-release/npm",
+    [
+      "@semantic-release/git",
+      {
+        "verifyConditions": true,
+        "assets": [
+          "package.json",
+          "package-lock.json",
+          "CHANGELOG.md"
+        ],
+        "message": "chore: release ${nextRelease.version}\n\n${nextRelease.notes}"
+      }
+    ]
+  ],
+  "ci": false,
+  "debug": true
+}
