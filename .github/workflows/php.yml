@@ -50,7 +50,7 @@ jobs:
               run: |
                   sh generate-jwt-keypair.sh
                   mkdir -p config/jwt
-                  cp docker/jwt/* config/jwt
+                  mv docker/jwt/* config/jwt/
 
             - name: Prepare database enviroment
               run: |
@@ -78,7 +78,7 @@ jobs:
                   DATABASE_SERVER_VERSION: 14
 
             - name: Run php-cs-fixer
-              run: vendor/bin/php-cs-fixer fix --dry-run --debug -vvv
+              run: vendor/bin/php-cs-fixer fix --dry-run -vvv
 
             - name: Run reactor
               run: vendor/bin/rector process --dry-run -vvv
