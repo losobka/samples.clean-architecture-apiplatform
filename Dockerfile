@@ -6,12 +6,15 @@ ENV APP_ENV=prod
 
 WORKDIR /srv/app
 
+USER ${UID}:${GUID}
+
 RUN apk add --no-cache \
 		acl \
 		fcgi \
 		file \
 		gettext \
 		git \
+    	tzdata \
 	;
 
 RUN apk add --update linux-headers;
@@ -110,7 +113,7 @@ RUN set -eux; \
 	apk del .build-deps
 
 RUN rm -f .env.local.php
-RUN ln -s /usr/bin/composer /srv/app/bin/composer
+RUN ln -s /usr/bin/composer /srv/app/bin/composerconf
 
 FROM caddy:2-builder-alpine AS api_caddy_builder
 
@@ -122,8 +125,14 @@ RUN xcaddy build \
 
 FROM caddy:2-alpine AS api_caddy
 
+RUN apk add --no-cache tzdata;
+
 WORKDIR /srv/app
 
 COPY --from=api_caddy_builder --link /usr/bin/caddy /usr/bin/caddy
 COPY --from=api_php --link /srv/app/public public/
 COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
+
+FROM postgres:14-alpine AS database
+
+RUN apk add --no-cache tzdata;
