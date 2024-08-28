@@ -45,6 +45,12 @@ jobs:
 
             - name: Install dependencies
               run: composer install --prefer-dist --dev --no-progress --optimize-autoloader
+            
+            - name: generate JWT keypair
+              run: |
+                  sh generate-jwt-keypair.sh
+                  mkdir -p config/jwt
+                  cp docekr/jwt/* config/jwt
 
             - name: Prepare database enviroment
               run: |
