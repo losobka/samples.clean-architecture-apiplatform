@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Authentication\Application\UseCase\Signup;
 
+use App\User\Domain\Repository\UserRepository;
 use RuntimeException;
 use App\Authentication\Application\DTO\AuthTokenDTO;
 use App\Authentication\Application\Service\AuthTokenCreator;
@@ -32,6 +33,7 @@ final readonly class SignupCommandHandler implements CommandHandler
         private CommandBus $commandBus,
         private PasswordHasher $passwordHasher,
         private UserCredentialRepository $userCredentialRepository,
+        private UserRepository $userRepository,
         private AuthTokenCreator $authTokenCreator,
     ) {
     }
@@ -52,10 +54,13 @@ final readonly class SignupCommandHandler implements CommandHandler
             email: $command->email,
         );
 
+        $user = $this->userRepository->get(id: UserId::fromString($userDTO->id));;
+
         $userCredential = UserCredential::create(
-            userId: UserId::fromString($userDTO->id),
+//            id: $user->id(),
+            user: $user,
             username: Username::fromString($command->email),
-            hashedPassword: $this->passwordHasher->hash(Password::fromString($command->password)),
+            hashedPassword: $this->passwordHasher->hash(Password::fromString($command->password))
         );
 
         $this->userCredentialRepository->add($userCredential);

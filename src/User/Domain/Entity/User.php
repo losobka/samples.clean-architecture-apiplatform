@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace App\User\Domain\Entity;
 
+use App\Authentication\Domain\Event\UserHasBeenLoggedIn;
+use App\Authentication\Domain\Event\UserHasBeenRemoved;
 use RuntimeException;
 use App\Common\Domain\Entity\AggregateRoot;
 use App\Common\Domain\ValueObject\DateTime;
@@ -25,6 +27,7 @@ class User extends AggregateRoot
     private readonly DateTime $createdAt;
 
     private ?DateTime $removedAt = null;
+    private ?DateTime $lastLoginAt = null;
 
     private function __construct(
         private readonly FirstName $firstName,
@@ -72,9 +75,21 @@ class User extends AggregateRoot
         return $this->createdAt;
     }
 
+    public function lastLoginAt(): ?DateTime
+    {
+        return $this->lastLoginAt;
+    }
+
     public function isRemoved(): bool
     {
         return null !== $this->removedAt;
+    }
+
+    public function login(): void
+    {
+        $this->lastLoginAt = DateTime::now();
+
+        $this->record(domainEvent: UserHasBeenLoggedIn::create(aggregateRootId: $this->id()));
     }
 
     public function remove(): void
@@ -82,6 +97,8 @@ class User extends AggregateRoot
         $this->ensureIsNotAlreadyRemoved();
 
         $this->removedAt = DateTime::now();
+
+        $this->record(domainEvent: UserHasBeenRemoved::create(aggregateRootId: $this->id()));
     }
 
     private function ensureIsNotAlreadyRemoved(): void

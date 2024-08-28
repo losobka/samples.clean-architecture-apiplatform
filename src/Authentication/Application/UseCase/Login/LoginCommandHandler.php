@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Authentication\Application\UseCase\Login;
 
+use App\User\Domain\Repository\UserRepository;
 use Exception;
 use App\Authentication\Application\DTO\AuthTokenDTO;
 use App\Authentication\Application\Service\AuthTokenCreator;
@@ -28,6 +29,7 @@ final readonly class LoginCommandHandler implements CommandHandler
     public function __construct(
         private QueryBus $queryBus,
         private UserCredentialRepository $userCredentialRepository,
+        private UserRepository $userRepository,
         private PasswordHasher $passwordHasher,
         private AuthTokenCreator $authTokenCreator,
     ) {
@@ -52,9 +54,13 @@ final readonly class LoginCommandHandler implements CommandHandler
         $userDTO = $this->queryBus
             ->ask(
                 new GetUserByIdQuery(
-                    userId: (string) $userCredential->userId(),
+                    userId: (string) $userCredential->user()->Id(),
                 )
             );
+
+        $user = $this->userRepository->get(id: $userCredential->user()->id());
+
+        $user->login();
 
         return $this->authTokenCreator->createFromUserDTO($userDTO);
     }
